@@ -6,7 +6,7 @@ Curse Lord -
 Thread Lord -
 DJ Bridges -
 Inheritor of Suffering -
-Socketroth -
+Socketroth - Patrick Toovey
 Taste Tester -
 Integration Specialist -
 Screen Writer -
