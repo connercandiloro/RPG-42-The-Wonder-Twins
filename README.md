@@ -4,7 +4,7 @@ Roles:
 Project Manager - Conner Candiloro
 Curse Lord -
 Thread Lord -
-DJ Bridges -
+DJ Bridges - Omar shalash
 Inheritor of Suffering -
 Socketroth - Patrick Toovey
 Taste Tester -
