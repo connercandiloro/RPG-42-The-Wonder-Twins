@@ -10,3 +10,6 @@
 * Taste Tester - Luke
 * Integration Specialist - andromeda (S. Pena)
 * Screen Writer - Kaitlyn
+
+## Game Idea / Layout:
+Our game with the overall theme 'FREEDOM' takes place in 1776 where you, the player as a Founding Father, must defeat the Redcoats in the form of muskateers, cannons and more!
