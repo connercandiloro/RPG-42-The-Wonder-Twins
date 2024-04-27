@@ -1,6 +1,6 @@
 #pragma once
-enum MOVE{UP, DOWN, LEFT, RIGHT}
-enum interact{FIGHT, SPEAK, NEGOTIATE}
+enum MOVE{UP, DOWN, LEFT, RIGHT};
+enum INTERACT{FIGHT, SPEAK, NEGOTIATE};
 
 
 struct Thread_Safety {
