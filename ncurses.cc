@@ -1,1 +1,0 @@
-//JJK Curse Lord: Samuel Goosey
