@@ -1,0 +1,35 @@
+REQUIRED:
+1. Be fun
+2. Be able to win (whats the end goal?)
+3. How do you lose?
+4. 5 puzzles
+5. world map
+6. colors
+7. music
+8. All the tenent of FREEEEEDOM (right to: Life, Liberty, Property, and Free Market forces(gotta make that cash money)
+
+Scene open:
+*You awake in a mungy dirty boat unbeknowst to you, enroute to the Americas (caw caw)*
+*Greeted by John Adams or someone(idk im not a history buff-tbd once characters are made)*
+JA-"Hey, you. You're finally awake."
+(enter dialog/story here)
+
+proceed to character selection or not, doesnt look like we have to have a team this time, so could be solo play, either way, select stats?, weapon? inventory?(we have no inventory system or is it inheritor of suffering?)
+
+*main map load into colonial america
+
+MAIN OBJECTIVE FOR WHOLE GAME: FREEEEEDOM from King George or whoever achieved by possessing some final token, eliminating all the ememies, king flies around in a space ship thing like in sonic, collect all the tenents of FREEEEEDOM, idk
+
+PUZZLE IDEAS:
+
+1. riddle
+2. match keys to locks
+3. which door is the exit, clues abound
+4. simon says (is this too hard to implement idk)
+5. cryptogram
+
+If we have a room by room (map by map) set up each puzzle could lead to the next big area. envisioning cult of lamb style where some rooms just have some loot or something but dont actually progress the game. 
+
+Since we dont have inventory(circular linked list) or fighting roles(probably also a circular linked list), probably need to implement something simple in the implementation file or open to ideas, maybe someone has good code from RPG-41. 
+
+HOW TO LOSE: fail a puzzle 3 times, hp drops to 0, fail to acheive any one tenent of FREEEEEEDOM.
