@@ -147,6 +147,7 @@ public:
 class Red_Coats : public Monster{
 public:
 	Red_Coats(int x, int y);
+	void attack() override;
 	void run_ai() override;
 	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
