@@ -1,5 +1,6 @@
 //Tanner Dunn - Iheritor of Suffering
 #pragma once
+#include <algorithm>
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
