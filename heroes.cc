@@ -1,6 +1,5 @@
 //Tanner Dunn - Inheritor of Suffering
 #include "heroes_and_monsters.h"
-#include <algorithm>
 Actor::Actor(int new_x, int new_y) : x(new_x), y(new_y){};
 Actor::~Actor() = default;
 //pure virtual move_location(int new_x, int new_y) = 0; already defined 
