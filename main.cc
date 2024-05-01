@@ -4,6 +4,7 @@ using namespace std;
 int main() {
     initscr();
     noecho();
+    start_color();
 	keypad(stdscr, true);
 
 	WINDOW* mainwin = newwin(25, 87, 0, 0);
@@ -11,6 +12,8 @@ int main() {
 	refresh();
 
 	Player* p = new Player(mainwin, 13, 22);
+    
+    //game loop, gets player input and updates the game accordingily
     int choice;
     do {
         p->display();

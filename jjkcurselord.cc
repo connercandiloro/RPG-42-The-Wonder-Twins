@@ -1,6 +1,7 @@
 //JJK Curse Lord: Samuel Goosey
 #include "jjkcurselord.h"
 #include "maps.h"
+#include "attributes.h"
 using std::vector, std::string;
 
 Player::Player_Map::Player_Map(vector<string> newmapvec) {
@@ -8,11 +9,19 @@ Player::Player_Map::Player_Map(vector<string> newmapvec) {
 	north = south = east = west = nullptr;
 }
 
+void Player::Player_Map::setpointers(Player_Map* newnorth, Player_Map* newsouth, Player_Map* neweast, Player_Map* newwest) {
+	north = newnorth;
+	south = newsouth;
+	east = neweast;
+	west = newwest;
+}
+
 Player::Player(WINDOW* w, int y, int x) {
     win = w;
     yPos = y;
     xPos = x;
     linkmaps();
+	load_color();
     //placeholder items for debug purposes
     backpack.push_back("Item 1");
     backpack.push_back("Item 2");
@@ -31,43 +40,63 @@ Player::~Player() {
 }
 
 void Player::mvup() {
-    if (checkup() == ' ') {
+    if (canwalk(checkup(), this)) {
         yPos--;
     }
 }
 
 void Player::mvdown() {
-    if (checkdown() == ' ') {
+    if (canwalk(checkdown(), this)) {
         yPos++;
     }
 }
 
 void Player::mvleft() {
-    if (checkleft() == ' ') {
+    if (canwalk(checkleft(), this)) {
         xPos--;
     }
 }
 
 void Player::mvright() {
-    if (checkright() == ' ') {
+    if (canwalk(checkright(), this)) {
             xPos++;
         }
 }
 
 char Player::checkup() {
-    return mvwinch(win, yPos - 1, xPos);
+	if (yPos - 1 == 0) {
+		currmap = currmap->north; 
+		yPos = 24;
+		wclear(win);
+	}
+	return mvwinch(win, yPos - 1, xPos);
 }
 
-char Player::checkdown() {
-    return mvwinch(win, yPos + 1, xPos);
+char Player::checkdown() { 
+	if (yPos + 1 == 24) {
+		currmap = currmap->south;
+		yPos = 0;
+		wclear(win);
+	}
+	return mvwinch(win, yPos + 1, xPos);
 }
 
 char Player::checkleft() {
-    return mvwinch(win, yPos, xPos - 1);
+	if (xPos - 1 == 0) {
+		currmap = currmap->west;
+		xPos = 86;
+		wclear(win);
+	}
+	return mvwinch(win, yPos, xPos - 1);
 }
 
 char Player::checkright() {
-    return mvwinch(win, yPos, xPos + 1);
+	if (xPos + 1 == 86) {
+		currmap = currmap->east;
+		xPos = 0;
+		wclear(win);
+	}
+	return mvwinch(win, yPos, xPos + 1);
 }
 
 char Player::getinput() {
@@ -79,25 +108,21 @@ char Player::getinput() {
 			case KEY_UP:
 				mvup();
 				break;
-			
 			case 'a':
 			case 'A':
 			case KEY_LEFT:
 				mvleft();
 				break;
-			
 			case 's':
 			case 'S':
 			case KEY_DOWN:
 				mvdown();
 				break;
-			
 			case 'd':
 			case 'D':
 			case KEY_RIGHT:
 			    mvright();
 				break;
-            
             case 'm':
             case 'M':
                 UI(this);
@@ -111,7 +136,7 @@ char Player::getinput() {
 void Player::loadmap() {
     for (unsigned int i = 0; i < currmap->mapvec.size(); i++) {
 		for (unsigned j = 0; j < currmap->mapvec[i].size(); j++) {
-			mvwaddch(win, i + 1, j + 1, currmap->mapvec[i][j]);
+			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j]));
 		}
 	}
 }
@@ -126,6 +151,7 @@ void Player::debug() {
 void Player::display() {
     loadmap();
 	debug();
+	wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
     mvwaddch(win, yPos, xPos, '@');
     wmove(win, yPos, xPos);
     wrefresh(win);
@@ -133,6 +159,14 @@ void Player::display() {
 
 void Player::linkmaps() {
     Player_Map* start = new Player_Map(map0);
+	Player_Map* up = new Player_Map(map1);
+	Player_Map* left = new Player_Map(map2);
+	Player_Map* end = new Player_Map(map3);
+	//setpointer(north, south, east, west)
+	start->setpointers(up, nullptr, left, nullptr);
+	up->setpointers(nullptr, start, end, nullptr);
+	left->setpointers(end, nullptr, nullptr, start);
+	end->setpointers(nullptr, left, nullptr, up);
     currmap = start;
 }
 
@@ -280,13 +314,11 @@ char UI::getinput() {
 			case KEY_UP:
 				mvup();
 				break;
-			
 			case 's':
 			case 'S':
 			case KEY_DOWN:
 				mvdown();
 				break;
-
 			case 'e':
 			case 'E':
 			case 10: //Return/Enter
@@ -295,7 +327,6 @@ char UI::getinput() {
 					return 'z';
 				}
 				break;
-	
 			default:
 				break;
 		}
