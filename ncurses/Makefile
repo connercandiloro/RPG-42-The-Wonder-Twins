@@ -1,7 +1,7 @@
 CC = g++
 CCFLAGS = -Wall -Wextra -std=c++2a -fsanitize=address
 LDFLAGS = -shared
-MODULES = player.o ui.o attributes.o
+MODULES = player.o ui.o attributes.o cutscenes.o dialogue.o
 
 a.out: main.o ./ncurses.so
 	$(CC) main.o ./ncurses.so -fsanitize=address -lasan -lncurses
@@ -15,5 +15,9 @@ ui.o: ui.cc
 	$(CC) $(CCFLAGS) -fPIC -c ui.cc
 attributes.o: attributes.cc
 	$(CC) $(CCFLAGS) -fPIC -c attributes.cc
+cutscenes.o: cutscenes.cc
+	$(CC) $(CCFLAGS) -fPIC -c cutscenes.cc
+dialogue.o: dialogue.cc
+	$(CC) $(CCFLAGS) -fPIC -c dialogue.cc
 clean: 
-	rm -f a.out core *.o
+	rm -f a.out *.o

@@ -2,10 +2,12 @@
 #include <vector>
 #include <string>
 #include "ncurses.h"
+#include "unordered_map"
 
 class Player {
     WINDOW* win;
 	int yPos, xPos;
+	int playerChar;
 public:
     struct Player_Map{
 		std::vector<std::string> mapvec;
@@ -15,10 +17,11 @@ public:
 		Player_Map* west;
 		Player_Map(std::vector<std::string> newmapvec);
 		void setpointers(Player_Map* newnorth, Player_Map* newsouth, Player_Map* neweast, Player_Map* newwest);
+		std::unordered_map<char, std::pair<int, int>> scene_data;
 	};
     std::vector<std::string> backpack;
 	Player_Map* currmap;
-    Player(WINDOW* w, int y, int x);
+    Player(WINDOW* w, int y, int x, int pchar);
 	~Player();
 	void mvup();
 	void mvdown();

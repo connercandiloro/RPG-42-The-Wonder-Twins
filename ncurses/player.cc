@@ -17,10 +17,11 @@ void Player::Player_Map::setpointers(Player_Map* newnorth, Player_Map* newsouth,
 	west = newwest;
 }
 
-Player::Player(WINDOW* w, int y, int x) {
+Player::Player(WINDOW* w, int y, int x, int pchar) {
     win = w;
     yPos = y;
     xPos = x;
+	playerChar = pchar;
     linkmaps();
 	load_color();
     //placeholder items for debug purposes
@@ -140,6 +141,9 @@ void Player::loadmap() {
 			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j]));
 		}
 	}
+	for (const auto &pair : currmap->scene_data) {
+		mvwaddchcolor(win, pair.second.first, pair.second.second, pair.first, getcolorID(pair.first));
+	}
 }
 
 void Player::debug() {
@@ -153,20 +157,16 @@ void Player::display() {
     loadmap();
 	debug();
 	wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
-    mvwaddch(win, yPos, xPos, '@');
+    mvwaddch(win, yPos, xPos, playerChar);
     wmove(win, yPos, xPos);
     wrefresh(win);
 }
 
 void Player::linkmaps() {
-    Player_Map* start = new Player_Map(map0);
-	Player_Map* up = new Player_Map(map1);
-	Player_Map* left = new Player_Map(map2);
-	Player_Map* end = new Player_Map(map3);
+    Player_Map* tavern = new Player_Map(map0);
+	Player_Map* outside = new Player_Map(map1);
 	//setpointer(north, south, east, west)
-	start->setpointers(up, nullptr, left, nullptr);
-	up->setpointers(nullptr, start, end, nullptr);
-	left->setpointers(end, nullptr, nullptr, start);
-	end->setpointers(nullptr, left, nullptr, up);
-    currmap = start;
+	tavern->setpointers(nullptr, nullptr, outside, nullptr);
+	outside->setpointers(nullptr, nullptr, nullptr, tavern);
+    currmap = tavern;
 }

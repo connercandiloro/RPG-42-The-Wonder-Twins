@@ -11,13 +11,13 @@ int main() {
 	wborder(mainwin, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
 	refresh();
 
-	Player* p = new Player(mainwin, 13, 22);
+	Player* p1 = new Player(mainwin, 13, 22,'G');
     
     //game loop, gets player input and updates the game accordingily
     int choice;
     do {
-        p->display();
-        choice = p->getinput();
+        p1->display();
+        choice = p1->getinput();
     } while (choice != 'z');
     endwin();
 

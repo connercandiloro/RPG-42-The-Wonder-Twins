@@ -10,7 +10,7 @@ UI::UI(Player* p) {
 	menu = 0;
 	menuOffset = 0;
 	player = p;
-    win = newwin(21, 22, 2, 63);
+    win = newwin(21, 22, 2, 90);
 	loadmenu();
     getinput();
 }
@@ -168,7 +168,7 @@ char UI::getinput() {
 }
 
 void UI::debug() {
-    WINDOW* debug = newwin(6, 16, 0, 88);
+    WINDOW* debug = newwin(6, 16, 0, 111);
 	mvwprintw(debug, 1, 1, "Pos y: %d", yPos);
 	mvwprintw(debug, 2, 1, "Pos x: %d", xPos);
 	mvwprintw(debug, 3, 1, "Option: %d", option);
