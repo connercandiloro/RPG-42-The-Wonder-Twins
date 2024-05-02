@@ -5,7 +5,7 @@ struct Thread_Safety {
 Thread_Safety();
 ~Thread_Safety();
 
-void  in_char(const char  &c);
-char  out_char(); 
+void  in_char(int c);
+int  out_char(); 
 }
 
