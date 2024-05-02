@@ -1,12 +1,13 @@
 #pragma once
-#include "player.h"
 #include <ncurses.h>
+#include <string>
 
 class Textbox {
     WINDOW* win;
-    Player* p;
 public:
-    Textbox(const char npc, Player* p);
+    Textbox();
+    Textbox(char npc);
+    void print(std::string line);
     void clearwin();
     void confirm();
 };

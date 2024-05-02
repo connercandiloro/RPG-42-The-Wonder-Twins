@@ -23,6 +23,7 @@ public:
 	Player_Map* currmap;
     Player(WINDOW* w, int y, int x, int pchar);
 	~Player();
+	WINDOW* getwin();
 	void mvup();
 	void mvdown();
 	void mvleft();

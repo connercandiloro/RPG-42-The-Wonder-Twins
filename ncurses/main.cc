@@ -1,4 +1,5 @@
 #include "player.h"
+#include "cutscenes.h"
 using namespace std;
 
 int main() {
@@ -11,10 +12,12 @@ int main() {
 	wborder(mainwin, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
 	refresh();
 
-	Player* p1 = new Player(mainwin, 13, 22,'G');
-    
+	Player* p1 = new Player(mainwin, 12, 39,'G');
     //game loop, gets player input and updates the game accordingily
     int choice;
+    p1->loadmap();
+    wrefresh(mainwin);
+    cutscene_intro(p1);
     do {
         p1->display();
         choice = p1->getinput();

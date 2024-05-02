@@ -41,6 +41,10 @@ Player::~Player() {
     delete currmap;
 }
 
+WINDOW* Player::getwin() {
+	return win;
+}
+
 void Player::mvup() {
     if (canwalk(checkup(), this)) {
         yPos--;
