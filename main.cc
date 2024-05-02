@@ -1,4 +1,4 @@
-#include "jjkcurselord.h"
+#include "ncurses/jjkcurselord.h"
 using namespace std;
 
 int main() {

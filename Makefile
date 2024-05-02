@@ -1,12 +1,11 @@
+CC = g++
 CCFLAGS = -Wall -Wextra -std=c++2a -fsanitize=address
+LDFLAGS = -fsanitize=address -lasan -lncurses
+MODULES = main.o ncurses/ncurses.so
 
-a.out: main.o jjkcurselord.o attributes.o
-	g++ $(CCFLAGS) main.o jjkcurselord.o attributes.o -lncurses
+a.out: $(MODULES)
+	$(CC) $(MODULES) $(LDFLAGS)
 main.o: main.cc
-	g++ $(CCFLAGS) -c main.cc
-jjkcurselord.o: jjkcurselord.cc
-	g++ $(CCFLAGS) -c jjkcurselord.cc
-attributes.o: attributes.cc
-	g++ $(CCFLAGS) -c attributes.cc
-clean: 
+	$(CC) $(CCFLAGS) -c main.cc
+clean:
 	rm -f a.out core *.o
