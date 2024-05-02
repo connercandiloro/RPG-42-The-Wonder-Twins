@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #pragma once
 #include <string>
 #include <vector>

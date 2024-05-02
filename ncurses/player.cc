@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #include "player.h"
 #include "attributes.h"
 #include "maps.h"
@@ -19,6 +20,7 @@ void Player::Player_Map::setpointers(Player_Map* newnorth, Player_Map* newsouth,
 
 Player::Player(WINDOW* w, int y, int x, int pchar) {
     win = w;
+	debugwin = newwin(4, 16, 0, 88);
     yPos = y;
     xPos = x;
 	playerChar = pchar;
@@ -130,9 +132,13 @@ char Player::getinput() {
 			    mvright();
 				break;
             case 'm':
-            case 'M':
-                UI(this);
+            case 'M': {
+				wclear(debugwin);
+				wrefresh(debugwin);
+                UI menu(this);
+				choice = menu.getinput();
                 break;
+			}
 			default:
 				break;
 		}
@@ -151,10 +157,10 @@ void Player::loadmap() {
 }
 
 void Player::debug() {
-    WINDOW* debug = newwin(4, 16, 0, 88);
-	mvwprintw(debug, 1, 1, "Pos y: %d", yPos);
-	mvwprintw(debug, 2, 1, "Pos x: %d", xPos);
-	wrefresh(debug);
+	wclear(debugwin);
+	mvwprintw(debugwin, 1, 1, "Pos y: %d", yPos);
+	mvwprintw(debugwin, 2, 1, "Pos x: %d", xPos);
+	wrefresh(debugwin);
 }
 
 void Player::display() {

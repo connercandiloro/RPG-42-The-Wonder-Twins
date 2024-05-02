@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #include "dialogue.h"
 using std::string, std::to_string;
 

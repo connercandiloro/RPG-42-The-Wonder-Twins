@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #include "cutscenes.h"
 #include "dialogue.h"
 #include <thread>
@@ -71,7 +72,8 @@ void cutscene_intro(Player* p) {
     text.print("The crowd, now on edge, looks to him.");
     text.print("\"And what's the plan, Washington?\" they chorus.");
     text.print("George stands, striking a pose of defiance.");
-    George.moveChar(UP, 1, 250);
+    George.moveChar(UP, 2, 250);
+    George.moveChar(RIGHT, 5, 250);
     text.print("George: We pen a rousing declaration, rally the colonies, wage war for freedom! A war to end the occupation!");
     text.print("Hamilton, ever the firebrand, leaps up, his chair clattering behind.");
     Hamiliton.moveChar(UP, 1, 250);
@@ -79,6 +81,14 @@ void cutscene_intro(Player* p) {
     text.print("Jefferson, skeptical, chimes in-");
     text.print("Jefferson: This is lunacy, George! Without a solid plan, we're doomed to failure.");
     text.print("George: You know what else is doomed? Your marriage prospects after im done with ye!");
+    text.print("Jefferson, angered by George's insult, confronts him");
+    Jefferson.moveChar(LEFT, 5, 100);
+    Jefferson.moveChar(DOWN, 1, 100);
+    Jefferson.moveChar(LEFT, 5, 100);
+    Jefferson.moveChar(DOWN, 1, 100);
+    Jefferson.moveChar(LEFT, 5, 100);
+    text.print("Jefferson: What have you say of my marriage prospects?");
+    text.print("Jefferson: Have at thee!");
     text.delwin();
     
     p->currmap->scene_data.insert(make_pair(Egghead.charLetter, make_pair(Egghead.yPos, Egghead.xPos)));

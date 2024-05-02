@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #include "attributes.h"
 
 void load_color() {

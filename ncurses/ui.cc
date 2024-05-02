@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #include "ui.h"
 #include "player.h"
 #include "ncurses.h"
@@ -11,8 +12,8 @@ UI::UI(Player* p) {
 	menuOffset = 0;
 	player = p;
     win = newwin(21, 22, 2, 90);
+	debugwin = newwin(6, 16, 0, 112);
 	loadmenu();
-    getinput();
 }
 
 void UI::setpos(int y, int x) {
@@ -164,16 +165,20 @@ char UI::getinput() {
 				break;
 		}
 	} while (choice != 'm');
+	wclear(win);
+	wclear(debugwin);
+	wrefresh(win);
+	wrefresh(debugwin);
     return 'm';
 }
 
 void UI::debug() {
-    WINDOW* debug = newwin(6, 16, 0, 111);
-	mvwprintw(debug, 1, 1, "Pos y: %d", yPos);
-	mvwprintw(debug, 2, 1, "Pos x: %d", xPos);
-	mvwprintw(debug, 3, 1, "Option: %d", option);
-	mvwprintw(debug, 4, 1, "Menu Offset: %d", menuOffset);
-	wrefresh(debug);
+	wclear(debugwin);
+	mvwprintw(debugwin, 1, 1, "Pos y: %d", yPos);
+	mvwprintw(debugwin, 2, 1, "Pos x: %d", xPos);
+	mvwprintw(debugwin, 3, 1, "Option: %d", option);
+	mvwprintw(debugwin, 4, 1, "Menu Offset: %d", menuOffset);
+	wrefresh(debugwin);
 }
 
 void UI::display() {

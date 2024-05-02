@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #pragma once
 #include <vector>
 #include <string>
@@ -6,6 +7,7 @@
 
 class Player {
     WINDOW* win;
+	WINDOW* debugwin;
 	int yPos, xPos;
 	int playerChar;
 public:

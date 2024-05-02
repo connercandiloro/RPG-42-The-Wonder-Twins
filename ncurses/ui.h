@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #pragma once
 #include "ncurses.h"
 #include "player.h"
@@ -8,6 +9,7 @@ class UI {
     int xPos;
     int menu;
     WINDOW* win;
+    WINDOW* debugwin;
     unsigned int menuOffset;
     Player* player;
 public:

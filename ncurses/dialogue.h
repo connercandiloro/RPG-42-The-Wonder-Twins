@@ -1,3 +1,4 @@
+//JJKCurseLord: Samuel Goosey
 #pragma once
 #include <ncurses.h>
 #include <string>
