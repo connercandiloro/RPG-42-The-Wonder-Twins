@@ -1,7 +1,7 @@
 #pragma once
-#include <ncurses.h>
 #include <string>
-#include "jjkcurselord.h"
+#include "player.h"
+#include "ncurses.h"
 
 void load_color();
 

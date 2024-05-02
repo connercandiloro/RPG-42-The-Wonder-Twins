@@ -1,7 +1,7 @@
 #pragma once
-#include <ncurses.h>
 #include <vector>
 #include <string>
+#include "ncurses.h"
 
 class Player {
     WINDOW* win;
@@ -33,27 +33,4 @@ public:
 	void debug();
 	void display();
     void linkmaps();
-};
-
-class UI {
-    unsigned int option;
-    int yPos;
-    int xPos;
-    int menu;
-    WINDOW* win;
-    unsigned int menuOffset;
-    Player* player;
-public:
-    UI(Player* p);
-    void setpos(int y, int x);
-    void mvup();
-    void mvdown();
-    char select();
-    char getinput();
-    void debug();
-    void display();
-    void loadmenu();
-    void loadparty();
-    void loadinventory();
-    void clearwin();
 };
