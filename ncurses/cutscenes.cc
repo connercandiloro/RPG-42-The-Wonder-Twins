@@ -79,7 +79,8 @@ void cutscene_intro(Player* p) {
     text.print("Jefferson, skeptical, chimes in-");
     text.print("Jefferson: This is lunacy, George! Without a solid plan, we're doomed to failure.");
     text.print("George: You know what else is doomed? Your marriage prospects after im done with ye!");
-
+    text.delwin();
+    
     p->currmap->scene_data.insert(make_pair(Egghead.charLetter, make_pair(Egghead.yPos, Egghead.xPos)));
     p->currmap->scene_data.insert(make_pair(Hamiliton.charLetter, make_pair(Hamiliton.yPos, Hamiliton.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));

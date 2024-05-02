@@ -10,4 +10,5 @@ public:
     void print(std::string line);
     void clearwin();
     void confirm();
+    void delwin();
 };

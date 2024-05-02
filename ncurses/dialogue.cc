@@ -54,3 +54,8 @@ void Textbox::confirm() {
 		}
 	} while (choice != 'e');
 }
+
+void Textbox::delwin() {
+	wclear(win);
+	wrefresh(win);
+}
