@@ -1,4 +1,4 @@
-#include "ncurses/jjkcurselord.h"
+#include "ncurses/player.h"
 using namespace std;
 
 int main() {
