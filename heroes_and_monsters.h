@@ -11,146 +11,131 @@ using namespace std;
 
 class Actor{
 protected:
-	int x, y;
+	int y, x = 0;
 	bool is_called = false;
-	int total;
+	int total = 0;
 public:
-	Actor(int new_x, int new_y);
+	Actor(int new_y, int new_x);
 	virtual ~Actor();
-	virtual void move_location(int new_x, int new_y) = 0;
 	virtual pair<int, int> get_location();
+	void move_location(int new_y, int new_x);
 	void total_characters();	
 };
 class Stationary_Object : public Actor{
 protected:
-	string object_name;
+	string object_name = "";
 public:
-	Stationary_Object(int x, int y);
+	Stationary_Object(int y, int x);
 	void set_name(const string& new_name);
 	string get_name();
-	void move_location(int new_x, int new_y)override;
 	pair<int, int> get_location()override;
 };
 class Hero : public Actor{ 
 protected:
-	string name;
-	int attack_damage;
-	int HP;
+	string name = "";
+	int attack_damage = 0;
+	int HP = 0;
+	int init = 0;
 public: 
-	Hero(int x, int y, int basehealth);
+	Hero(int y, int x, int basehealth, int initiative);
 	void set_name(const string &new_name);
 	string get_name() const;
 	void set_DPS(int DPS);
 	int get_DPS() const;
 	void set_HP(int newHP);
 	int get_HP() const;
+	void set_initiative(int new_initiative);
+	int get_initiative() const;
 	virtual void attack() = 0; 
-	virtual void run_ai() = 0;
 };
 class George_Washington : public Hero{
 public:
-	George_Washington(int x, int y);
+	George_Washington(int y, int x);
 	void attack() override; 
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 };
 class Benjamin_Franklin : public Hero{
 public:
-	Benjamin_Franklin(int x, int y);
+	Benjamin_Franklin(int y, int x);
 	void attack() override; 
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 };
 class John_Adams : public Hero{
 public:
-	John_Adams(int x, int y);
+	John_Adams(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 };
 class James_Madison : public Hero{
 public:
-	James_Madison(int x, int y);
+	James_Madison(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 };
 class Thomas_Jefferson : public Hero{
 public:
-	Thomas_Jefferson(int x, int y);
+	Thomas_Jefferson(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
-	pair<int, int> get_location() override;
-};
-class Colonist : public Hero{
-public:
-	Colonist(int x, int y);
-	void attack() override;
-	void run_ai() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 };
 class Monster : public Actor{
 protected:
-	string name;
-	int attack_damage;
-	int HP;
+	string name = "";
+	int attack_damage = 0;
+	int HP = 0;
+	int init = 0;
 public:
-	Monster(int x, int y, int basehealth); 
+	Monster(int y, int x, int basehealth, int initiative); 
 	void set_DPS(int DPS);
 	int get_DPS() const;
 	void set_HP(int newHP);
 	int get_HP() const;
+	void set_initiative(int new_initiative);
+	int get_initiative() const;
 	virtual void attack() = 0;
 	virtual void run_ai() = 0;
 };
 class King_George_III : public Monster{
 public:
-	King_George_III(int x, int y);
+	King_George_III(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 	void run_ai() override;
 };
-class Henry_Clinton : public Monster{
+class Robo_Shakespeare : public Monster{
 public:
-	Henry_Clinton(int x, int y);
+	Robo_Shakespeare(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 	void run_ai() override;
 };
-class Cannon : public Monster{
+class Kraken : public Monster{
 public:
-	Cannon(int x, int y);
+	Kraken(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 	void run_ai() override;
 };
 class Red_Coat_General : public Monster{
 public:
-	Red_Coat_General(int x, int y);
+	Red_Coat_General(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 	void run_ai() override;
 };
-class Red_Coat_Commander : public Monster{
+class Three_Musketeers : public Monster{
 public:
-	Red_Coat_Commander(int x, int y);
+	Three_Musketeers(int y, int x);
 	void attack() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
 	void run_ai() override;
 };
 class Red_Coats : public Monster{
 public:
-	Red_Coats(int x, int y);
+	Red_Coats(int y, int x);
 	void attack() override;
-	void run_ai() override;
-	void move_location(int new_x, int new_y) override;
 	pair<int, int> get_location() override;
+	void run_ai() override;
 };
 //HOW TO USE:
 //To create a character, perform the following command: "George_Washington gerorge_washington(10, 10)." Remember that (10, 10) only holds ints that are supposed to represent the characters location on the map. You can move their location by calling the function "move_location(20, 20)." You can also get the location by calling "get_location()." Some error checking may be needed in main to ensure that the character does not go out of bounds.
