@@ -32,6 +32,12 @@ void Textbox::print(string line) {
 	confirm();
 }
 
+bool Textbox::print_select(string line, string select1, string select2) {
+	clearwin();
+	mvwprintw(win, 1, 1, "%s", line.c_str());
+	return select(select1, select2);
+}
+
 void Textbox::clearwin() {
     for (int i = 0; i < 5; i++) {
 		mvwprintw(win, i, 0, "                                                                                  ");
@@ -54,6 +60,52 @@ void Textbox::confirm() {
 				break;
 		}
 	} while (choice != 'e');
+}
+
+bool Textbox::select(string option1, string option2) {
+	mvwprintw(win, 2, 2, "%s", option1.c_str());
+	mvwprintw(win, 3, 2, "%s", option2.c_str());
+	int cursorY = 2;
+	int choice;
+	do {
+		mvwaddch(win, cursorY, 1, '*');
+		wmove(win, cursorY, 1);
+		wrefresh(win);
+		choice = getch();
+		mvwaddch(win, cursorY, 1, ' ');
+		switch(choice) {
+			case 'W':
+			case 'w':
+			case KEY_UP:
+				if (cursorY == 2) {
+					cursorY++;
+				}
+				else {
+					cursorY--;
+				}
+				break;
+			case 'S':
+			case 's':
+			case KEY_DOWN:
+				if (cursorY == 3) {
+					cursorY--;
+				}
+				else {
+					cursorY++;
+				}
+				break;
+			case 'E':
+			case 10:
+				choice = 'e';
+				break;
+			default:
+				break;
+		};
+	} while (choice != 'e');
+	if (cursorY == 2) {
+		return true;
+	}
+	return false;
 }
 
 void Textbox::delwin() {

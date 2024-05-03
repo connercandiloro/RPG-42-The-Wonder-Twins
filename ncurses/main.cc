@@ -12,15 +12,15 @@ int main() {
 	wborder(mainwin, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
 	refresh();
 
-	Player* p1 = new Player(mainwin, 11, 44,'G');
+	Player* p = new Player(mainwin, 11, 44,'G');
     //game loop, gets player input and updates the game accordingily
     int choice;
-    p1->loadmap();
+    p->loadmap();
     wrefresh(mainwin);
-    //cutscene_intro(p1);
     do {
-        p1->display();
-        choice = p1->getinput();
+        cutscene_check(p);
+        p->display();
+        choice = p->getinput();
     } while (choice != 'z');
     endwin();
 
