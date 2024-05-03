@@ -16,8 +16,8 @@ protected:
 	int total = 0;
 public:
 	Actor(int new_y, int new_x);
-	virtual ~Actor();
-	virtual pair<int, int> get_location();
+	virtual ~Actor() = default;
+	virtual pair<int, int> get_location() = 0;
 	void move_location(int new_y, int new_x);
 	void total_characters();	
 };
@@ -28,7 +28,7 @@ public:
 	Stationary_Object(int y, int x);
 	void set_name(const string& new_name);
 	string get_name();
-	pair<int, int> get_location()override;
+	pair<int, int> get_location() override;
 };
 class Hero : public Actor{ 
 protected:
@@ -46,36 +46,36 @@ public:
 	int get_HP() const;
 	void set_initiative(int new_initiative);
 	int get_initiative() const;
-	virtual void attack() = 0; 
+	virtual void attack(int x) = 0; 
 };
 class George_Washington : public Hero{
 public:
 	George_Washington(int y, int x);
-	void attack() override; 
+	void attack(int x) override; 
 	pair<int, int> get_location() override;
 };
 class Benjamin_Franklin : public Hero{
 public:
 	Benjamin_Franklin(int y, int x);
-	void attack() override; 
+	void attack(int x) override; 
 	pair<int, int> get_location() override;
 };
 class John_Adams : public Hero{
 public:
 	John_Adams(int y, int x);
-	void attack() override;
+	void attack(int x) override;
 	pair<int, int> get_location() override;
 };
 class James_Madison : public Hero{
 public:
 	James_Madison(int y, int x);
-	void attack() override;
+	void attack(int x) override;
 	pair<int, int> get_location() override;
 };
 class Thomas_Jefferson : public Hero{
 public:
 	Thomas_Jefferson(int y, int x);
-	void attack() override;
+	void attack(int x) override;
 	pair<int, int> get_location() override;
 };
 class Monster : public Actor{
