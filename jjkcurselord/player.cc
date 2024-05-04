@@ -6,14 +6,12 @@ using std::vector, std::string;
 
 Player::Player_Map::Player_Map(vector<string> newmapvec) {
 	mapvec = newmapvec;
-	north = south = east = west = nullptr;
+	prev = next = nullptr;
 }
 
-void Player::Player_Map::setpointers(Player_Map* newnorth, Player_Map* newsouth, Player_Map* neweast, Player_Map* newwest) {
-	north = newnorth;
-	south = newsouth;
-	east = neweast;
-	west = newwest;
+void Player::Player_Map::setpointers(Player_Map* newprev, Player_Map* newnext) {
+	prev = newprev;
+	next = newnext;
 }
 
 Player::Player(WINDOW* w, int y, int x, int pchar) {
@@ -71,7 +69,6 @@ void Player::mvright() {
 
 char Player::checkup() {
 	if (yPos - 1 == 0) {
-		currmap = currmap->north; 
 		yPos = 24;
 		wclear(win);
 	}
@@ -80,7 +77,6 @@ char Player::checkup() {
 
 char Player::checkdown() { 
 	if (yPos + 1 == 24) {
-		currmap = currmap->south;
 		yPos = 0;
 		wclear(win);
 	}
@@ -89,7 +85,7 @@ char Player::checkdown() {
 
 char Player::checkleft() {
 	if (xPos - 1 == 0) {
-		currmap = currmap->west;
+		currmap = currmap->prev;
 		xPos = 86;
 		wclear(win);
 	}
@@ -98,7 +94,7 @@ char Player::checkleft() {
 
 char Player::checkright() {
 	if (xPos + 1 == 86) {
-		currmap = currmap->east;
+		currmap = currmap->next;
 		xPos = 0;
 		wclear(win);
 	}
@@ -172,9 +168,11 @@ void Player::display() {
 
 void Player::linkmaps() {
     Player_Map* tavern = new Player_Map(map0);
-	Player_Map* outside = new Player_Map(map1);
-	//setpointer(north, south, east, west)
-	tavern->setpointers(nullptr, nullptr, outside, nullptr);
-	outside->setpointers(nullptr, nullptr, nullptr, tavern);
+	Player_Map* outside_tavern = new Player_Map(map1);
+	Player_Map* tavern_harbor = new Player_Map(map2);
+	//setpointer(prev, next)
+	tavern->setpointers(nullptr, outside_tavern);
+	outside_tavern->setpointers(tavern, tavern_harbor);
+	tavern_harbor->setpointers(outside_tavern, nullptr);
     currmap = tavern;
 }

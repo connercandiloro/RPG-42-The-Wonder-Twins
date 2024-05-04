@@ -13,12 +13,10 @@ class Player {
 public:
     struct Player_Map{
 		std::vector<std::string> mapvec;
-		Player_Map* north;
-		Player_Map* south;
-		Player_Map* east;
-		Player_Map* west;
+		Player_Map* next;
+		Player_Map* prev;
 		Player_Map(std::vector<std::string> newmapvec);
-		void setpointers(Player_Map* newnorth, Player_Map* newsouth, Player_Map* neweast, Player_Map* newwest);
+		void setpointers(Player_Map* newprev, Player_Map* newnext);
 		std::unordered_map<char, std::pair<int, int>> scene_data;
 	};
     std::vector<std::string> backpack;

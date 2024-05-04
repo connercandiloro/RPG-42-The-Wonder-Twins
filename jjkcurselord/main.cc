@@ -17,7 +17,7 @@ int main() {
     p->loadmap();
     wrefresh(mainwin);
     do {
-        cutscene_check(p);
+        //cutscene_check(p);
         p->display();
         choice = p->getinput();
     } while (choice != 'z');
