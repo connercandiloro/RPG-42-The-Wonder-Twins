@@ -65,37 +65,130 @@ TEST(getlocation, AllInheritanceFunctions) { //Replace with tests like washingto
 
 //Inheritance Tests Part 2:
 
-TEST(HeroLocation, GetLocCstor) { //Default location check
+TEST(HeroLocation, GetLoc_vs_Cstor) { //Default location check
+	George_Washington gw(1,2); //NOTE: (x,y) in constructor for heroes
+	//cout << "total characters = 1: " << gw.total << endl; //Totals not accesible (protected not public), need a getter if you want to check them.
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+	EXPECT_EQ(gw.get_location(), make_pair(1,2)); //NOTE: (x,y) in get_location.
+	EXPECT_EQ(bf.get_location(), make_pair(2,3));
+	EXPECT_EQ(ja.get_location(), make_pair(3,4));
+	EXPECT_EQ(jm.get_location(), make_pair(4,5));
+	EXPECT_EQ(tj.get_location(), make_pair(5,6)); 
+	//All tests pass in this configuration.
 }
 
-TEST(HeroLocation, GetLocSetLoc) { //Set location check.
+TEST(HeroLocation, GetLoc_vs_MoveLoc) { //Set location check.
+	George_Washington gw(1,2); //NOTE: (x,y) in constructor for heroes
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+	EXPECT_EQ(gw.get_location(), make_pair(1,2)); 
+	EXPECT_EQ(bf.get_location(), make_pair(2,3));
+	EXPECT_EQ(ja.get_location(), make_pair(3,4));
+	EXPECT_EQ(jm.get_location(), make_pair(4,5));
+	EXPECT_EQ(tj.get_location(), make_pair(5,6)); 
+	
+	gw.move_location(2,1); //NOTE: Set location uses yx, so this doesn't actually change anything.
+	bf.move_location(3,2);
+	ja.move_location(4,3);
+	jm.move_location(5,4);
+	tj.move_location(6,5);
+
+	//Below tests fail because get_location and constructor use xy, while move_location uses yx.
+	//FIXME: For best compatability with ncurses yx format, change all to yx. Regardless, must match to avoid incorrect behavior.
+	EXPECT_EQ(gw.get_location(), make_pair(2,1)); 
+	EXPECT_EQ(bf.get_location(), make_pair(3,2));
+	EXPECT_EQ(ja.get_location(), make_pair(4,3));
+	EXPECT_EQ(jm.get_location(), make_pair(5,4));
+	EXPECT_EQ(tj.get_location(), make_pair(6,5)); 	
+
+	
 }
 
-TEST(HeroLocation, ColonistAI) { //Same as Monster AI.
+TEST(MonsterLocation, GetLoc_vs_Cstor) {
+	King_George_III kg(1,2); //NOTE: Cstor uses xy.
+	Robo_Shakespeare rs(2,3);
+	Kraken kr(3,4);
+	Red_Coat_General rg(4,5);
+	Three_Musketeers tm(5,6);
+	Red_Coats rc(6,7);
+	EXPECT_EQ(kg.get_location(), make_pair(1,2)); //NOTE: get_loc uses xy
+	EXPECT_EQ(rs.get_location(), make_pair(2,3));
+	EXPECT_EQ(kr.get_location(), make_pair(3,4));
+	EXPECT_EQ(rg.get_location(), make_pair(4,5));
+	EXPECT_EQ(tm.get_location(), make_pair(5,6)); 
+	EXPECT_EQ(rc.get_location(), make_pair(6,7));
+
 }
 
-TEST(MonsterLocation, GetLocCstor) {
+TEST(MonsterLocation, GetLoc_vs_MoveLoc) {
+	King_George_III kg(1,2);
+	Robo_Shakespeare rs(2,3);
+	Kraken kr(3,4);
+	Red_Coat_General rg(4,5);
+	Three_Musketeers tm(5,6);
+	Red_Coats rc(6,7);
+	EXPECT_EQ(kg.get_location(), make_pair(1,2)); 
+	EXPECT_EQ(rs.get_location(), make_pair(2,3));
+	EXPECT_EQ(kr.get_location(), make_pair(3,4));
+	EXPECT_EQ(rg.get_location(), make_pair(4,5));
+	EXPECT_EQ(tm.get_location(), make_pair(5,6)); 
+	EXPECT_EQ(rc.get_location(), make_pair(6,7));
+
+	kg.move_location(2,1); //NOTE: Set location uses yx, so this doesn't actually change anything.
+	rs.move_location(3,2);
+	kr.move_location(4,3);
+	rg.move_location(5,4);
+	tm.move_location(6,5);
+	rc.move_location(7,6);
+
+	EXPECT_EQ(kg.get_location(), make_pair(2,1)); //move_loc uses yx, FIXME like above. 
+	EXPECT_EQ(rs.get_location(), make_pair(3,2));
+	EXPECT_EQ(kr.get_location(), make_pair(4,3));
+	EXPECT_EQ(rg.get_location(), make_pair(5,4));
+	EXPECT_EQ(tm.get_location(), make_pair(6,5)); 
+	EXPECT_EQ(rc.get_location(), make_pair(7,6));
+
+
+
 }
 
-TEST(MonsterLocation, GetLocSetLoc) {
+TEST(MonsterLocation, MonsterAI) { //Verify random number generation works.
+	King_George_III kg(1,2);
+	Robo_Shakespeare rs(2,3);
+	Kraken kr(3,4);
+	Red_Coat_General rg(4,5);
+	Three_Musketeers tm(5,6);
+	Red_Coats rc(6,7);
+	EXPECT_EQ(kg.get_location(), make_pair(1,2)); 
+	EXPECT_EQ(rs.get_location(), make_pair(2,3));
+	EXPECT_EQ(kr.get_location(), make_pair(3,4));
+	EXPECT_EQ(rg.get_location(), make_pair(4,5));
+	EXPECT_EQ(tm.get_location(), make_pair(5,6)); 
+	EXPECT_EQ(rc.get_location(), make_pair(6,7));
+	
+
 }
 
-TEST(MonsterLocation, MonsterAI) {
+TEST(HeroName, GetName_vs_Cstor) { //Should these be set by default?
 }
 
-TEST(HeroName, GetNameCstor) { //Should these be set by default?
+TEST(HeroName, GetName_vs_SetName) {
 }
 
-TEST(HeroName, GetNameSetName) {
+TEST(MonsterName, GetName_vs_Cstor) { //Should be empty?
 }
 
-TEST(MonsterName, GetNameCstor) { //Should be empty?
+TEST(MonsterName, GetName_vs_SetName) { //Can these be set?
 }
 
-TEST(MonsterName, GetNameSetName) { //Can these be set?
-}
 
 TEST(ActorInfo, TotalCharacters) {
+//FIX: Total characters inaccessible (protected, no getter), cannot verify, function may or may not work
 }
 
 TEST(HeroInit, InitCstor) {
