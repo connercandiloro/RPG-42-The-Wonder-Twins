@@ -17,7 +17,7 @@ lock_guard LG(lock_deque);
 deck.push_back(c);
 };
 
-int  out_char(){
+char  out_char(){
 lock_guard LG(lock_deque);
 if(deck.size() == 0) throw invalid_arguement("no movement in the deque");
 char temp = deck.front();
