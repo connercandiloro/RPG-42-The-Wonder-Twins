@@ -31,13 +31,13 @@ THINGS THAT WORK:
 */
 
 
-int testInteger(int x) { return x; }
+/*int testInteger(int x) { return x; }
 
 TEST(testInteger, basic_equality) {
 	EXPECT_EQ(testInteger(5), 5);
 }
 
-TEST(get_location, AllInheritanceFunctions) { //Replace with tests like washington, etc.
+TEST(getlocation, AllInheritanceFunctions) { //Replace with tests like washington, etc.
 	//George_Washington gw(12,12);
 	pair <int,int> posXY(7,7);
 	Colonist cl(6,7);
@@ -61,8 +61,60 @@ TEST(get_location, AllInheritanceFunctions) { //Replace with tests like washingt
 	cl.set_DPS(-11);
 	EXPECT_EQ(cl.get_DPS(), -11);
 		
+}*/
+
+//Inheritance Tests Part 2:
+
+TEST(HeroLocation, GetLocCstor) { //Default location check
 }
 
+TEST(HeroLocation, GetLocSetLoc) { //Set location check.
+}
+
+TEST(HeroLocation, ColonistAI) { //Same as Monster AI.
+}
+
+TEST(MonsterLocation, GetLocCstor) {
+}
+
+TEST(MonsterLocation, GetLocSetLoc) {
+}
+
+TEST(MonsterLocation, MonsterAI) {
+}
+
+TEST(HeroName, GetNameCstor) { //Should these be set by default?
+}
+
+TEST(HeroName, GetNameSetName) {
+}
+
+TEST(MonsterName, GetNameCstor) { //Should be empty?
+}
+
+TEST(MonsterName, GetNameSetName) { //Can these be set?
+}
+
+TEST(ActorInfo, TotalCharacters) {
+}
+
+TEST(HeroInit, InitCstor) {
+}
+
+TEST(HeroInit, GetSetInit) {
+}
+
+TEST(MonsterInit, InitCstor) {
+}
+
+TEST(MonsterInit, GetSetInit) {
+}
+
+TEST(HeroAttack, HeroAttack) { //Takes argument
+}
+
+TEST(MonsterAttack, MonsterAttack) { //Takes random number
+}
 
 /*TEST(userMove, EdgeTests) {
 
