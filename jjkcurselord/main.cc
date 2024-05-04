@@ -11,7 +11,7 @@ int main() {
 	wborder(mainwin, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
 	refresh();
 
-	Player* p = new Player(mainwin, 11, 44,'G');
+	Player* p = new Player(mainwin, 11, 44, 'G');
     //game loop, gets player input and updates the game accordingily
     int choice;
     p->loadmap();

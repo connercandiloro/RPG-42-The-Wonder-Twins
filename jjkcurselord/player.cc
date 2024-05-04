@@ -9,9 +9,10 @@ Player::Player_Map::Player_Map(vector<string> newmapvec) {
 	prev = next = nullptr;
 }
 
-void Player::Player_Map::setpointers(Player_Map* newprev, Player_Map* newnext) {
+void Player::Player_Map::setpointers(Player_Map* newprev, Player_Map* newnext, int mapid) {
 	prev = newprev;
 	next = newnext;
+	ID = mapid;
 }
 
 Player::Player(WINDOW* w, int y, int x, int pchar) {
@@ -142,11 +143,11 @@ char Player::getinput() {
 void Player::loadmap() {
     for (unsigned int i = 0; i < currmap->mapvec.size(); i++) {
 		for (unsigned j = 0; j < currmap->mapvec[i].size(); j++) {
-			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j]));
+			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j], this));
 		}
 	}
 	for (const auto &pair : currmap->scene_data) {
-		mvwaddchcolor(win, pair.second.first, pair.second.second, pair.first, getcolorID(pair.first));
+		mvwaddchcolor(win, pair.second.first, pair.second.second, pair.first, getcolorID(pair.first, this));
 	}
 }
 
@@ -170,9 +171,13 @@ void Player::linkmaps() {
     Player_Map* tavern = new Player_Map(map0);
 	Player_Map* outside_tavern = new Player_Map(map1);
 	Player_Map* tavern_harbor = new Player_Map(map2);
-	//setpointer(prev, next)
-	tavern->setpointers(nullptr, outside_tavern);
-	outside_tavern->setpointers(tavern, tavern_harbor);
-	tavern_harbor->setpointers(outside_tavern, nullptr);
-    currmap = tavern;
+	Player_Map* ocean = new Player_Map(map3);
+	Player_Map* castle_harbor = new Player_Map(map4);
+	//setpointer(prev, next, mapID)
+	tavern->setpointers(nullptr, outside_tavern, 0);
+	outside_tavern->setpointers(tavern, tavern_harbor, 1);
+	tavern_harbor->setpointers(outside_tavern, ocean, 2);
+	ocean->setpointers(tavern_harbor, castle_harbor, 3);
+	castle_harbor->setpointers(ocean, nullptr, 4);
+    currmap = castle_harbor;
 }

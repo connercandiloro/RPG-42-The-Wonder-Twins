@@ -15,8 +15,9 @@ public:
 		std::vector<std::string> mapvec;
 		Player_Map* next;
 		Player_Map* prev;
+        int ID;
 		Player_Map(std::vector<std::string> newmapvec);
-		void setpointers(Player_Map* newprev, Player_Map* newnext);
+		void setpointers(Player_Map* newprev, Player_Map* newnext, int mapid);
 		std::unordered_map<char, std::pair<int, int>> scene_data;
 	};
     std::vector<std::string> backpack;
@@ -69,7 +70,7 @@ void mvwaddchcolor(WINDOW* w, int y, int x, char c, int pairID);
 
 void mvwprintwcolor(WINDOW* w, int y, int x, std::string s, int pairID);
 
-int getcolorID(const char c);
+int getcolorID(const char c, const Player* p);
 
 bool canwalk(const char c, const Player* p);
 
