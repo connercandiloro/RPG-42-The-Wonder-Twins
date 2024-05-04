@@ -7,6 +7,7 @@ void load_color() {
     init_pair(3, COLOR_GREEN, COLOR_BLACK);
     init_pair(4, COLOR_CYAN, COLOR_BLACK);
     init_pair(5, COLOR_WHITE, COLOR_BLACK);
+    init_pair(6, COLOR_BLACK, COLOR_WHITE);
 }
 void mvwaddchcolor(WINDOW* w, int y, int x, char c, int pairID) {
     wattron(w, COLOR_PAIR(pairID));
@@ -83,10 +84,16 @@ int getcolorID(const char c, const Player* p) {
     }
     else if (p->currmap->ID == 5) {
         switch (c) {
+            case ',':
+                return 3;
+            case '.':
+                return 6;
         }
     }
     else if (p->currmap->ID == 6) {
         switch (c) {
+            case '.':
+                return 6;
         }
     }
     return 0;

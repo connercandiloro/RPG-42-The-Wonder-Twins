@@ -25,6 +25,8 @@ public:
     Player(WINDOW* w, int y, int x, int pchar);
 	~Player();
 	WINDOW* getwin();
+    int gety();
+    int getx();
 	void mvup();
 	void mvdown();
 	void mvleft();

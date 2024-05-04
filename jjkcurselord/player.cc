@@ -44,6 +44,14 @@ WINDOW* Player::getwin() {
 	return win;
 }
 
+int Player::gety() {
+	return yPos;
+}
+
+int Player::getx() {
+	return xPos;
+}
+
 void Player::mvup() {
     if (canwalk(checkup(), this)) {
         yPos--;
@@ -173,11 +181,15 @@ void Player::linkmaps() {
 	Player_Map* tavern_harbor = new Player_Map(map2);
 	Player_Map* ocean = new Player_Map(map3);
 	Player_Map* castle_harbor = new Player_Map(map4);
+	Player_Map* outside_castle = new Player_Map(map5);
+	Player_Map* castle = new Player_Map(map6);
 	//setpointer(prev, next, mapID)
 	tavern->setpointers(nullptr, outside_tavern, 0);
 	outside_tavern->setpointers(tavern, tavern_harbor, 1);
 	tavern_harbor->setpointers(outside_tavern, ocean, 2);
 	ocean->setpointers(tavern_harbor, castle_harbor, 3);
-	castle_harbor->setpointers(ocean, nullptr, 4);
+	castle_harbor->setpointers(ocean, outside_castle, 4);
+	outside_castle->setpointers(castle_harbor, castle, 5);
+	castle->setpointers(outside_castle, nullptr, 6);
     currmap = castle_harbor;
 }
