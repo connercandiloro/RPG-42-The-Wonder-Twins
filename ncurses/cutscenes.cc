@@ -1,10 +1,7 @@
 //JJKCurseLord: Samuel Goosey
-#include "cutscenes.h"
-#include "dialogue.h"
+#include "jjkcurselord.h"
 #include <thread>
 #include <chrono>
-#include <vector>
-#include <string>
 using std::vector, std::string, std::make_pair, std::to_string;
 
 #define UP 0

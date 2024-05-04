@@ -1,5 +1,5 @@
 //JJKCurseLord: Samuel Goosey
-#include "dialogue.h"
+#include "jjkcurselord.h"
 using std::string, std::to_string;
 
 Textbox::Textbox() : win(newwin(5, 83, 25, 2)) {}

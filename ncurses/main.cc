@@ -1,5 +1,4 @@
-#include "player.h"
-#include "cutscenes.h"
+#include "jjkcurselord.h"
 using namespace std;
 
 int main() {

@@ -1,8 +1,6 @@
 //JJKCurseLord: Samuel Goosey
-#include "player.h"
-#include "attributes.h"
+#include "jjkcurselord.h"
 #include "maps.h"
-#include "ui.h"
 
 using std::vector, std::string;
 

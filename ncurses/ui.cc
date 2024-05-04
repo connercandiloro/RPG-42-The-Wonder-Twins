@@ -1,7 +1,5 @@
 //JJKCurseLord: Samuel Goosey
-#include "ui.h"
-#include "player.h"
-#include "ncurses.h"
+#include "jjkcurselord.h"
 using std::string;
 
 UI::UI(Player* p) {

@@ -1,5 +1,5 @@
 //JJKCurseLord: Samuel Goosey
-#include "attributes.h"
+#include "jjkcurselord.h"
 
 void load_color() {
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
