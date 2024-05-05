@@ -12,7 +12,8 @@ using std::vector, std::string, std::make_pair, std::to_string;
 
 bool intro_scene = false;
 bool harbor_scene = false;
-bool castle_scene = false;
+bool castle_harbor_scene = false;
+bool outside_castle_scene = false;
 
 Character::Character(int y, int x, char letter, WINDOW* w) : yPos(y), xPos(x), charLetter(letter), win(w) {
     display();
@@ -78,9 +79,13 @@ void cutscene_check(Player* p) {
         cutscene_harbor(p);
         harbor_scene = true;
     }
-    if (!castle_scene and p->currmap->ID == 5) {
-        cutscene_castle(p);
-        castle_scene = true;
+    if (!castle_harbor_scene and p->currmap->ID == 4 and p->getx() > 62) {
+        cutscene_castle_harbor2(p);
+        castle_harbor_scene = true;
+    }
+    if (!outside_castle_scene and p->currmap->ID == 5) {
+        cutscene_castle_outside(p);
+        outside_castle_scene = true;
     }
 }
 
@@ -257,7 +262,7 @@ void cutscene_castle_harbor(Player* p) {
     p->display();
 }
 
-void cutscene_castle(Player* p) {
+void cutscene_castle_harbor2(Player* p) {
     Textbox text;
     text.print("As they approach the colossal iron doors barring their path, a foreboding sign looms overhead.");
     text.print("Warning of dire consequences for those who dare to trespass onto royal grounds.");
@@ -267,23 +272,35 @@ void cutscene_castle(Player* p) {
     p->display();
 }
 
-turn_order::turn_order() : first(nullptr) {}
-
-Character* turn_order::getfirst() {
-    return first;
+void cutscene_castle_outside(Player* p) {
+    Character Benjamin(p->gety() + 2, p->getx() + 2, 'B', p->getwin());
+    Character Jefferson(p->gety() + 4, p->getx() + 2, 'J', p->getwin());
+    Character Adams(p->gety() - 2, p->getx() + 2, 'A', p->getwin());
+    Textbox text;
+    text.print("Out brave heros make there way inside the castle walls.");
+    text.print("There they are met by the formidable trio known as the Royal Musketeers.");
+    text.print("Their sneering taunts echoing off the castle walls.");
+    text.print("George: One, two, three. First we'll kill you, and then drink tea!");
+    text.print("The 3 Musketeers want to battle!");
+    //start_combat_castle(p);
+    text.print("You vanquished the Three Musketeers!");
+    text.print("King George lies just ahead.");
+    text.delwin();
 }
 
-void turn_order::add(Character* c) {
-    if (first == nullptr) {
-        first = c;
-        first->next = first;
-    }
-    else {
-        Character* temp = first;
-        while (temp->next != first) {
-            temp = temp->next;
-        }
-        temp->next = c;
-        c->next = first;
-    }
+void cutscene_castle(Player* p) {
+    Textbox text;
+    Character Benjamin(p->gety() + 2, p->getx() + 2, 'B', p->getwin());
+    Character Jefferson(p->gety() + 4, p->getx() + 2, 'J', p->getwin());
+    Character Adams(p->gety() - 2, p->getx() + 2, 'A', p->getwin());
+    text.print("Finally, the Founding Fathers stand before King George himself.");
+    text.print("His arrogance palpable as he sneers.");
+    text.print("King George: Fear me and my wrath!");
+    text.print("Without hesitation, George Washington raises his weapon and fires, silencing the tyrant forever.");
+    Character Bullet(p->gety(), p->getx() + 1, '.', p->getwin());
+    text.print("George: Alas, liberty restored!");
+    text.print("George: Maybe the real liberty was the friends we made along the way.");
+    text.print("Amidst laughter and camaraderie, they make their way back to their ship.");
+    text.print("Sailing off into the sunset, leaving behind a land forever changed by their absurd and audacious quest for freedom.");
+    text.print("The End");
 }

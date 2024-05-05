@@ -111,6 +111,8 @@ void start_combat_harbor(Player* p);
 
 void start_combat_ocean(Player* p);
 
+void start_combat_castle(Player* p);
+
 void cutscene_check(Player* p);
 
 void cutscene_intro(Player* p);
@@ -119,7 +121,11 @@ void cutscene_harbor(Player* p);
 
 void cutscene_ocean(Player* p);
 
-void cutscene_castle_harbor (Player* p);
+void cutscene_castle_harbor(Player* p);
+
+void cutscene_castle_harbor2(Player* p);
+
+void cutscene_castle_outside(Player* p);
 
 void cutscene_castle(Player* p);
 

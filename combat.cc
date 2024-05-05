@@ -10,6 +10,27 @@ void displayOrder(Character* c) {
     mvwprintw(c->win, c->yPos, c->xPos - 7, "Turn >");
 }
 
+turn_order::turn_order() : first(nullptr) {}
+
+Character* turn_order::getfirst() {
+    return first;
+}
+
+void turn_order::add(Character* c) {
+    if (first == nullptr) {
+        first = c;
+        first->next = first;
+    }
+    else {
+        Character* temp = first;
+        while (temp->next != first) {
+            temp = temp->next;
+        }
+        temp->next = c;
+        c->next = first;
+    }
+}
+
 void start_combat_intro(Player* p) {
     WINDOW* win = p->getwin();
     Character* george = new Character(12, 27, 'G', win, new George_Washington(0, 0));
@@ -244,5 +265,9 @@ void start_combat_harbor(Player* p) {
 }
 
 void start_combat_ocean(Player* p) {
-    
+
+}
+
+void start_combat_castle(Player* p) {
+
 }
