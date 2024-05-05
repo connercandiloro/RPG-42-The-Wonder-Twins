@@ -6,11 +6,11 @@ int main() {
     initscr();
     noecho();
     start_color();
-	keypad(stdscr, true);
 
     //makes main game window
 	WINDOW* mainwin = newwin(25, 87, 0, 0);
 	wborder(mainwin, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
+    keypad(stdscr, true);
 	refresh();
 
     //makes new player with parameters (game window, yPos, xPos, player character)
