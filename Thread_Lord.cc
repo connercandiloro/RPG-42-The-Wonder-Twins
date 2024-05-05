@@ -19,7 +19,7 @@ deck.push_back(c);
 
 char  out_char(){
 lock_guard LG(lock_deque);
-if(deck.size() == 0) throw invalid_arguement("no movement in the deque");
+if(deck.size() == 0) throw std::invalid_arguement("no movement in the deque");
 char temp = deck.front();
 deck.pop_front();
 return temp;

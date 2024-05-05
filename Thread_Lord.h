@@ -1,6 +1,6 @@
 #pragma once
 
-struct Thread_Safety {
+class Thread_Safety {
 
 Thread_Safety();
 ~Thread_Safety();
