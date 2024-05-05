@@ -139,14 +139,6 @@ char Player::getinput() {
 			case KEY_RIGHT:
 			    mvright();
 				break;
-            case 'm':
-            case 'M': {
-				wclear(debugwin);
-				wrefresh(debugwin);
-                UI menu(this);
-				choice = menu.getinput();
-                break;
-			}
 			default:
 				break;
 		}

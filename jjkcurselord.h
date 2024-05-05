@@ -105,15 +105,21 @@ public:
     void add(Character* c);
 };
 
-void printSprite_Davy(Player* p, int y, int x);
+char printSprite_Davy(WINDOW* win, int y, int x);
 
-void start_combat_intro(Player* p);
+void printSprite_DavyHP(Character* c);
 
-void start_combat_harbor(Player* p);
+char printSprite_Musketeers(WINDOW* win, int y, int x);
 
-void start_combat_ocean(Player* p);
+void printSprite_MusketeersHP(Character* c);
 
-void start_combat_castle(Player* p);
+void start_combat_intro(WINDOW* win);
+
+void start_combat_harbor(WINDOW* win);
+
+void start_combat_ocean(WINDOW* win);
+
+void start_combat_castle(WINDOW* win);
 
 bool cutscene_check(Player* p);
 

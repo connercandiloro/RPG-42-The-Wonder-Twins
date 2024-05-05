@@ -1,4 +1,5 @@
 //JJKCurseLord: Samuel Goosey
+//Menu scraped for final build due to lack of party and inventory system
 #include "jjkcurselord.h"
 using std::string;
 
