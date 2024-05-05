@@ -95,11 +95,33 @@ bool cutscene_check(Player* p) {
     return false;
 }
 
-void printSprite_Davy(Player* p, int y, int x) {
-    mvwprintw(p->getwin(), y, x, "   ___");
-    mvwprintw(p->getwin(), y + 1, x, "  /O O\\");
-    mvwprintw(p->getwin(), y + 2, x, "  \\___/ ");
-    mvwprintw(p->getwin(), y + 3, x, " \\_/ \\_/ ");
+char printSprite_Davy(WINDOW* win, int y, int x) {
+    mvwprintw(win, y, x + 3, "___");
+    mvwprintw(win, y + 1, x + 2, "/O O\\");
+    mvwprintw(win, y + 2, x + 2, "\\___/ ");
+    mvwprintw(win, y + 3, x + 1, "\\_/ \\_/ ");
+    wrefresh(win);
+    return 'K';
+}
+
+void printSprite_DavyHP(Character* c) {
+    string line = "HP: " + to_string(c->monsterclass->get_HP());
+    mvwprintw(c->win, c->yPos + 2, c->xPos - 2, "%s", line.c_str());
+    wrefresh(c->win);
+}
+
+char printSprite_Musketeers(WINDOW* win, int y, int x) {
+    mvwprintw(win, y - 2, x + 2, "M");
+    mvwprintw(win, y, x, "M");
+    mvwprintw(win, y + 2, x + 2, "M");
+    wrefresh(win);
+    return 'M';
+}
+
+void printSprite_MusketeersHP(Character* c) {
+    string line = "HP: " + to_string(c->monsterclass->get_HP());
+    mvwprintw(c->win, c->yPos + 3, c->xPos, "%s", line.c_str());
+    wrefresh(c->win);
 }
 
 void cutscene_intro(Player* p) {
@@ -142,7 +164,7 @@ void cutscene_intro(Player* p) {
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     p->currmap->scene_data.insert(make_pair(Madison.charLetter, make_pair(Madison.yPos, Madison.xPos)));
-    //start_combat_intro(p);
+    start_combat_intro(p->getwin());
     p->display();
     text.print("As the dust settles, George stand victorious.");
     Adams.moveChar(DOWN, 3, 150);
@@ -199,7 +221,7 @@ void cutscene_harbor(Player* p) {
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     p->currmap->scene_data.insert(make_pair(Madison.charLetter, make_pair(Madison.yPos, Madison.xPos)));
-    //start_combat_harbor(p);
+    start_combat_harbor(p->getwin());
     p->setpos(George.yPos, George.xPos);
     p->display();
     text.print("Adams: Holy ****, it worked! The boat is ours!");
@@ -231,6 +253,7 @@ void cutscene_ocean(Player* p) {
     text.print("George: Oh him, we'll get him a souviner.");
     text.print("Suddenly, a commotion erupts amongst the crew as a monstrous creature emerges from the depths.");
     text.print("An enormous, tentacled creature with a mustache that would rival any dapper gentleman jumps aboard the ship.");
+    printSprite_Davy(p->getwin(), 10, 45);
     text.print("Adams: By the crown jewels, it's the Dreadful Davy Squidsworth!");
     text.print("George, undaunted, takes a swig from his tankard.");
     text.print("George: Prepare for battle lads. We shan't be deterred by a mere oversized calamari!");
@@ -239,7 +262,13 @@ void cutscene_ocean(Player* p) {
     text.print("George: To kill the king.");
     text.print("Davy: Huzaah, is that true? I simply can not allow it then.");
     text.print("Davy: I challenge you goodsirs to a duel.");
-    //start_combat_ocean(p);
+    p->currmap->scene_data.insert(make_pair(George.charLetter, make_pair(George.yPos, George.xPos)));
+    p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
+    p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
+    p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
+    start_combat_ocean(p->getwin());
+    p->loadmap();
+    printSprite_Davy(p->getwin(), 10, 45);
     text.print("Davy, defeated, begins to tear up.");
     text.print("Davy: Rahh, I lost my dignity, ahhh.");
     text.print("Adams: There there, calm down. Its not your fault that you lost its because that wretched King George failed to help you.");
@@ -300,7 +329,7 @@ void cutscene_castle_outside(Player* p) {
     p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
-    //start_combat_castle(p);
+    start_combat_castle(p->getwin());
     p->display();
     text.print("You vanquished the Three Musketeers!");
     text.print("King George lies just ahead.");

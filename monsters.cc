@@ -131,7 +131,7 @@ void Robo_Shakespeare::run_ai(){
 Kraken::Kraken(int y, int x) : Monster(y, x, 400, 12){is_called = true; set_name("Davy Squidsworth");}
 void Kraken::attack(){
 	srand(time(nullptr));
-	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
+	//this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -236,7 +236,7 @@ void Red_Coat_General::run_ai(){
 Three_Musketeers::Three_Musketeers(int y, int x) : Monster(y, x, 250, 7){is_called = true; set_name("Three Musketeers");}
 void Three_Musketeers::attack(){
 	srand(time(nullptr));
-	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
+	//this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -288,7 +288,7 @@ void Three_Musketeers::run_ai(){
 Red_Coats::Red_Coats(int y, int x) : Monster(y, x, 200, 1){is_called = true; set_name("Red Coat");}
 void Red_Coats::attack(){
 	srand(time(nullptr));
-	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
+	//this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
