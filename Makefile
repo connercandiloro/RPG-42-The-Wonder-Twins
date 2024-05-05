@@ -1,5 +1,5 @@
 CC = g++
-CCFLAGS = -Wall -Wextra -std=c++2a 
+CCFLAGS = -Wall -Wextra -std=c++2a -fsanitize=address
 MODULES = Thread_Lord.o main.o player.o ui.o attributes.o cutscenes.o  combat.o dialogue.o heroes.o monsters.o 
 LDFLAGS = -fsanitize=address -lasan -lncurses
 
