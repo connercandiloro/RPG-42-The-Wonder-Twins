@@ -14,7 +14,7 @@ public:
 Thread_Safety();
 ~Thread_Safety();
 
-void in_char(const char c) {
+void in_char(const char &c) {
 lock_guard LG(lock_deque);
 deck.push_back(c);
 };
