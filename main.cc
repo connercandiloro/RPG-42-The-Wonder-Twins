@@ -25,7 +25,7 @@ int main() {
         if (cutscene_check(p)) {
             break; //breaks game loop if final cutscene is played
         }
-        p->getinput(); //waits for player input
+        choice = p->getinput(); //waits for player input
     } while (choice != 'z'); //game quits whenever player inputs 'z'
     endwin();
 

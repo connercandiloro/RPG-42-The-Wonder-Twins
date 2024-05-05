@@ -168,7 +168,7 @@ void cutscene_intro(Player* p) {
     p->display();
     text.print("As the dust settles, George stand victorious.");
     Adams.moveChar(DOWN, 3, 150);
-    Adams.moveChar(RIGHT, 18, 150);
+    Adams.moveChar(RIGHT, 18, 75);
     text.print("Adams: Enough! I am aware your mother dropped you as child but thats no reason to act like children.");
     text.print("George: Agreed, we have no time for petty squabble.");
     text.print("Benjamin: Yeah, let's share some democracy with those red coats!");

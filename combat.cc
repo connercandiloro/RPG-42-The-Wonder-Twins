@@ -44,6 +44,8 @@ void start_combat_intro(WINDOW* win) {
     order.add(george);
     order.add(jeff);
     order.add(ben);
+    jeff->heroclass->set_HP(150);
+    ben->heroclass->set_HP(100);
     Textbox text;
     text.print("Thomas Jefferson and Benjamin Franklin want to fight!");
     while (jeff->heroclass->get_HP() > 0 or ben->heroclass->get_HP() > 0) {
@@ -126,6 +128,12 @@ void start_combat_intro(WINDOW* win) {
         } while (currChar != order.getfirst());
         text.delwin();
     }
+    delete george->heroclass;
+    delete jeff->heroclass;
+    delete ben->heroclass;
+    delete george;
+    delete jeff;
+    delete ben;
 }
 
 void start_combat_harbor(WINDOW* win) {
@@ -265,6 +273,14 @@ void start_combat_harbor(WINDOW* win) {
         } while (currChar != order.getfirst());
         text.delwin();
     }
+    delete george->heroclass;
+    delete jeff->heroclass;
+    delete bigredcoat->monsterclass;
+    delete lilredcoat->monsterclass;
+    delete george;
+    delete jeff;
+    delete bigredcoat;
+    delete lilredcoat;
 }
 
 void start_combat_ocean(WINDOW* win) {
@@ -400,6 +416,16 @@ void start_combat_ocean(WINDOW* win) {
             currChar = currChar->next;
         } while (currChar != order.getfirst() and davy->monsterclass->get_HP() > 0);
     }
+    delete george->heroclass;
+    delete jeff->heroclass;
+    delete ben->heroclass;
+    delete adams->heroclass;
+    delete davy->monsterclass;
+    delete george;
+    delete jeff;
+    delete ben;
+    delete adams;
+    delete davy;
 }
 
 void start_combat_castle(WINDOW* win) {
@@ -438,7 +464,7 @@ void start_combat_castle(WINDOW* win) {
             adams->printHP();
             printSprite_Musketeers(win, 12, 54);
             printSprite_MusketeersHP(musketeers);
-            if (currChar->charLetter == 'G') {
+            if (currChar->charLetter == 'G' and george->heroclass->get_HP() > 0) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Command and Conquer", "Fists of Freedom", "Trillion Dollar Destruction");
                 if (playerAtkChoice == 1) {
                     text.print("George Washington commands his fleet to attack!");
@@ -454,7 +480,7 @@ void start_combat_castle(WINDOW* win) {
                 string line = "The 3 Muskeeters were hit for " + to_string(george->heroclass->get_DPS()) + " damage";
                 text.print(line);
             }
-            else if (currChar->charLetter == 'J') {
+            else if (currChar->charLetter == 'J' and jeff->heroclass->get_HP() > 0) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Independence Day", "Macaroni Mayhem", "Religious Revolution");
                 if (playerAtkChoice == 1) {
                     text.print("Thomas Jefferson exclaims the Declaration of Independence against the opponent striking fear into their hearts!");
@@ -470,7 +496,7 @@ void start_combat_castle(WINDOW* win) {
                 string line = "The 3 Muskeeters were hit for " + to_string(jeff->heroclass->get_DPS()) + " damage";
                 text.print(line);
             }
-            else if (currChar->charLetter == 'B') {
+            else if (currChar->charLetter == 'B' and ben->heroclass->get_HP() > 0) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Knowledge Blast", "Franklin Spear", "Sizzling Surprise");
                 if (playerAtkChoice == 1) {
                     text.print("Benjamin Franklin fills the enemies mind with too much wisdom!");
@@ -486,7 +512,7 @@ void start_combat_castle(WINDOW* win) {
                 string line = "The 3 Muskeeters were hit for " + to_string(ben->heroclass->get_DPS()) + " damage";
                 text.print(line);
             }
-            else if (currChar->charLetter == 'A') {
+            else if (currChar->charLetter == 'A' and adams->heroclass->get_HP() > 0) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Liberty Glare", "Naval Assault", "Bring the House Down");
                 if (playerAtkChoice == 1) {
                     text.print("John Adams stares into the souls of his enemy and inflicts fear upon them!");
@@ -539,4 +565,20 @@ void start_combat_castle(WINDOW* win) {
             currChar = currChar->next;
         } while (currChar != order.getfirst() and musketeers->monsterclass->get_HP() > 0);
     }
+    delete george->heroclass;
+    delete jeff->heroclass;
+    delete ben->heroclass;
+    delete adams->heroclass;
+    delete musketeers->monsterclass;
+    delete musketeer1->monsterclass;
+    delete musketeer2->monsterclass;
+    delete musketeer3->monsterclass;
+    delete george;
+    delete jeff;
+    delete ben;
+    delete adams;
+    delete musketeers;
+    delete musketeer1;
+    delete musketeer2;
+    delete musketeer3;
 }
