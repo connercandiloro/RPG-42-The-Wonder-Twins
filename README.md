@@ -1,4 +1,4 @@
-![Founding Freedom Logo](https://ibb.co/gypBHYR)
+![Founding Freedom Logo](FinalFinalLogo.jpg)
 
 ## Roles:
 * Project manager - Conner
