@@ -1,5 +1,8 @@
 ![Founding Freedom Logo](FinalFinalLogo.jpg)
 
+## Game Controls
+
+
 ## Roles:
 * Project manager - Conner
 * Curse Lord - Goose
