@@ -70,7 +70,7 @@ void Character::display() {
 
 void cutscene_check(Player* p) {
     if (!intro_scene) {
-        cutscene_intro(p);
+        //cutscene_intro(p);
         intro_scene = true;
     }
     if (!harbor_scene and p->currmap->ID == 2) {
@@ -181,8 +181,72 @@ void cutscene_harbor(Player* p) {
     p->display();
     text.print("Adams: Holy ****, it worked! The Boat is ours!");
     text.print("George: No time to rest, To Great Britain!");
-    p->currmap->prev->prev->scene_data.clear();
+    George.moveChar(RIGHT, 3, 100);
+    George.moveChar(UP, 8, 150);
+    cutscene_ocean(p);
+}
+
+void cutscene_ocean(Player* p) {
+    p->currmap = p->currmap->next;
+    wclear(p->getwin());
+    wborder(p->getwin(), (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
+    wrefresh(p->getwin());
+    Textbox text;
+    text.print("As the ship pulls away from the dock, our heros set sail for Great Britain.");
+    p->loadmap();
+    text.print("The ship sails into the sunset, the sound of distant waves mixed with the murmurs of a crew both triumphant and incredulous at their newfound fortune.");
+    Character George(12, 65, 'G', p->getwin());
+    Character Benjamin(14, 36, 'B', p->getwin());
+    Character Jefferson(10, 36, 'J', p->getwin());
+    Character Adams(12, 30, 'A', p->getwin());
+    text.print("The ship cuts through the ocean waves, propelled by the winds of destiny and the sheer audacity of its crew.");
+    text.print("George Washington, at the helm with a makeshift tricorn hat perched jauntily atop his head, surveys the horizon with a determined gaze.");
+    text.print("Adams: Umm, guys.");
+    text.print("Adams: We forgot Madisson!");
+    text.print("George: Who?");
+    text.print("Adams: JAMES MADDISON, our mate.");
+    text.print("George: Oh him, we'll get him a souviner.");
+    text.print("Suddenly, a commotion erupts amongst the crew as a monstrous creature emerges from the depths.");
+    text.print("An enormous, tentacled creature with a mustache that would rival any dapper gentleman jumps aboard the ship.");
+    text.print("Adams: By the crown jewels, it's the Dreadful Davy Squidsworth!");
+    text.print("George, undaunted, takes a swig from his tankard.");
+    text.print("George: Prepare for battle lads. We shan't be deterred by a mere oversized calamari!");
+    text.print("Davy: By his majesties 7 wives who are you and why are you on british sea.");
+    text.print("Jefferson: No need to worry, we are just mere merchants here to-");
+    text.print("George: To kill the king.");
+    text.print("Davy: Huzaah, is that true? I simply can not allow it then.");
+    text.print("Davy: I challenge you goodsirs to a duel.");
+    //start_combat_ocean(p);
+    text.delwin();
+    text.print("Davy, defeated, begins to tear up.");
+    text.print("Davy: Rahh, I lost my dignity, ahhh.");
+    text.print("Adams: There there, calm down. Its not your fault that you lost its because that wretched King George failed to help you.");
+    text.print("Davy: Hmm.. You're right, its unfair that it was all of you against me.");
+    text.print("Adams: So how about a rematch after we speak to the king?");
+    text.print("Davy: But wont you kill him, right?");
+    text.print("Adams: No, I swear on George Washington's honor and intellect.");
+    text.print("Davy: Fine, I'll take you to the king. Just to talk, understood?");
+    text.print("Adams: Understood.");
+    cutscene_castle_harbor(p);
+}
+
+void cutscene_castle_harbor(Player* p) {
+    p->currmap = p->currmap->next;
+    wclear(p->getwin());
+    wborder(p->getwin(), (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
+    wrefresh(p->getwin());
+    Textbox text;
+    text.print("Disembarking onto the rocky shores, George Washington leads his band of misfits towards the imposing castle gates, determination blazing in their eyes.");
+    text.print("With nothing but their wits and a reckless courage, they press onward, ready for their final showdown with the tyrant who dares to oppress their land.");
+    p->setpos(4, 50);
     p->display();
+    Character Benjamin(4, 45, 'B', p->getwin());
+    Character Jefferson(4, 40, 'J', p->getwin());
+    Character Adams(4, 35, 'A', p->getwin());
+    text.print("George: To end the British occupation for FREEDOM!");
+    p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
+    p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
+    p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     text.delwin();
 }
 

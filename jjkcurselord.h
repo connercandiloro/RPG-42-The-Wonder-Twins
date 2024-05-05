@@ -109,11 +109,17 @@ void start_combat_intro(Player* p);
 
 void start_combat_harbor(Player* p);
 
+void start_combat_ocean(Player* p);
+
 void cutscene_check(Player* p);
 
 void cutscene_intro(Player* p);
 
 void cutscene_harbor(Player* p);
+
+void cutscene_ocean(Player* p);
+
+void cutscene_castle_harbor (Player* p);
 
 class Textbox {
     WINDOW* win;

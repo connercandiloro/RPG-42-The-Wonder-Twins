@@ -242,3 +242,7 @@ void start_combat_harbor(Player* p) {
         text.delwin();
     }
 }
+
+void start_combat_ocean(Player* p) {
+    
+}
