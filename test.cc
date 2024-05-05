@@ -157,7 +157,32 @@ TEST(MonsterLocation, GetLoc_vs_MoveLoc) {
 
 }
 
-TEST(MonsterLocation, MonsterAI) { //Verify random number generation works.
+bool checkIfAdj(pair<int, int> og, pair<int, int> mv) {
+	int ogX = og.first, ogY = og.second, mvX = mv.first, mvY = mv.second; //xy format check
+	if ((mvY == ogY - 1) && mvX == ogX) { //Above
+		cout << "above" << endl;
+		return true;
+	}
+	else if (mvY == ogY && (mvX == ogX - 1)) { //Left
+		cout << "left" << endl;
+		return true;
+	}
+	else if (mvY == ogY && (mvX == ogX + 1)) { //Right
+		cout << "right" << endl;
+		return true;
+	}
+	else if ((mvY == ogY + 1) && mvX == ogX) { //Down
+		cout << "down" << endl;
+		return true;
+	}
+	else {
+		cout << "Diagnostic: " << endl;
+		return false;
+	}
+
+}
+//NOTE: Random number generation correctly generates adjacent spots.
+TEST(MonsterLocation, MonsterAI) { 
 	King_George_III kg(1,2);
 	Robo_Shakespeare rs(2,3);
 	Kraken kr(3,4);
@@ -170,11 +195,42 @@ TEST(MonsterLocation, MonsterAI) { //Verify random number generation works.
 	EXPECT_EQ(rg.get_location(), make_pair(4,5));
 	EXPECT_EQ(tm.get_location(), make_pair(5,6)); 
 	EXPECT_EQ(rc.get_location(), make_pair(6,7));
-	
+
+	kg.run_ai(); //FIXME: run_ai() reseeds every function call, time(nullptr) only refreshes once a second, so my advice would be to manually increment the seed with srand(aicounter), with a counter++ at the beginning of the ai functions. This guarantees a different seed every call.
+	EXPECT_NE(kg.get_location(), make_pair(1,2));
+	EXPECT_TRUE(checkIfAdj(make_pair(1,2), kg.get_location()));
+	//cout << "new kg location, (1,2) -> (" << kg.get_location().first << "," << kg.get_location().second << ")" << endl;
+	//usleep(1'500'000);
+	rs.run_ai();
+	EXPECT_NE(rs.get_location(), make_pair(2,3));
+	EXPECT_TRUE(checkIfAdj(make_pair(2,3), rs.get_location()));
+	//cout << "new rs location, (2,3) -> (" << rs.get_location().first << "," << rs.get_location().second << ")" << endl;
+	//usleep(1'500'000);
+	kr.run_ai();
+	EXPECT_NE(kr.get_location(), make_pair(3,4));
+	EXPECT_TRUE(checkIfAdj(make_pair(3,4), kr.get_location()));
+	//cout << "new kr location, (3,4) -> (" << kr.get_location().first << "," << kr.get_location().second << ")" << endl;
+	//usleep(1'500'000);
+	rg.run_ai();
+	EXPECT_NE(rg.get_location(), make_pair(4,5));
+	EXPECT_TRUE(checkIfAdj(make_pair(4,5), rg.get_location()));
+	//cout << "new rg location, (4,5) -> (" << rg.get_location().first << "," << rg.get_location().second << ")" << endl;
+	//usleep(1'500'000);
+	tm.run_ai();
+	EXPECT_NE(tm.get_location(), make_pair(5,6));
+	EXPECT_TRUE(checkIfAdj(make_pair(5,6), tm.get_location()));
+	//cout << "new tm location, (5,6) -> (" << tm.get_location().first << "," << tm.get_location().second << ")" << endl;
+	//usleep(1'500'000);
+	rc.run_ai();
+	EXPECT_NE(rc.get_location(), make_pair(6,7));
+	EXPECT_TRUE(checkIfAdj(make_pair(6,7), rc.get_location()));
+	//cout << "new rc location, (6,7) -> (" << rc.get_location().first << "," << rc.get_location().second << ")" << endl;
+	//usleep(1'500'000);
 
 }
 
 TEST(HeroName, GetName_vs_Cstor) { //Should these be set by default?
+
 }
 
 TEST(HeroName, GetName_vs_SetName) {
@@ -188,7 +244,7 @@ TEST(MonsterName, GetName_vs_SetName) { //Can these be set?
 
 
 TEST(ActorInfo, TotalCharacters) {
-//FIX: Total characters inaccessible (protected, no getter), cannot verify, function may or may not work
+//FIXME: Total characters inaccessible (protected, no getter), cannot verify, function may or may not work
 }
 
 TEST(HeroInit, InitCstor) {
@@ -247,4 +303,59 @@ int main(int argc, char** argv) {
 	}
 
 }*/
+
+	/*
+	const int runNum = 100;
+
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = kg.get_location();
+		kg.run_ai();
+		usleep(1'500'000);
+
+		pair<int, int> newPos = kg.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}
+	
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = rs.get_location();
+		rs.run_ai();
+		pair<int, int> newPos = rs.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = kr.get_location();
+		kr.run_ai();
+		pair<int, int> newPos = kr.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = rg.get_location();
+		rg.run_ai();
+		pair<int, int> newPos = rg.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = tm.get_location();
+		tm.run_ai();
+		pair<int, int> newPos = tm.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}
+	for (int i = 0; i < runNum; i++) {
+		pair<int, int> oldPos = rc.get_location();
+		rc.run_ai();
+		pair<int, int> newPos = rc.get_location();
+		EXPECT_NE(newPos, oldPos);
+		EXPECT_TRUE(checkIfAdj(oldPos, newPos));	
+
+	}*/
 
