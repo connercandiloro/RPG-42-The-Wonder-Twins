@@ -23,13 +23,10 @@ int main() {
     do {
         p->display(); //updates player position
         if (cutscene_check(p)) {
-            choice = 'z';
+            break; //breaks game loop if final cutscene is played
         }
-        else {
-            p->getinput();
-        }
-    } while (choice != 'z');
-    //game quits whenever player inputs 'z'
+        p->getinput(); //waits for player input
+    } while (choice != 'z'); //game quits whenever player inputs 'z'
     endwin();
 
     return 0;

@@ -105,6 +105,8 @@ public:
     void add(Character* c);
 };
 
+void printSprite_Davy(Player* p, int y, int x);
+
 void start_combat_intro(Player* p);
 
 void start_combat_harbor(Player* p);

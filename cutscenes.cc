@@ -95,6 +95,13 @@ bool cutscene_check(Player* p) {
     return false;
 }
 
+void printSprite_Davy(Player* p, int y, int x) {
+    mvwprintw(p->getwin(), y, x, "   ___");
+    mvwprintw(p->getwin(), y + 1, x, "  /O O\\");
+    mvwprintw(p->getwin(), y + 2, x, "  \\___/ ");
+    mvwprintw(p->getwin(), y + 3, x, " \\_/ \\_/ ");
+}
+
 void cutscene_intro(Player* p) {
     Textbox text;
     Character George(13, 39, 'G', p->getwin());
