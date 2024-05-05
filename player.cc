@@ -165,7 +165,7 @@ void Player::debug() {
 
 void Player::display() {
 	loadmap();
-	debug();
+	//sdebug();
 	wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
     mvwaddch(win, yPos, xPos, playerChar);
     wmove(win, yPos, xPos);
