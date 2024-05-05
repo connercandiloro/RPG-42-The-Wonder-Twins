@@ -63,7 +63,17 @@ TEST(getlocation, AllInheritanceFunctions) { //Replace with tests like washingto
 		
 }*/
 
-//Inheritance Tests Part 2:
+//TODO: Inheritance Tests Part 2:
+/*
+1. Change pair order of get_location from xy to yx.
+2. Change order of consturctors from xy to yx.
+3. move_location() is correct yx order, no need for change.
+4. Make changes to randomization algorithms, srand(time(nullptr)) means that random function will have exact same values if functions are called twice in a second. Affects monsters run_ai() functions and monsters attack() functions.
+5. Founding Fathers should have name set by default. Also, monsters do not have option to get or set names. Is this intentional?
+6. Couldn't test actor method of TotalCharacters, I assume it works, but no getters or setters.
+For more information, check out the fairly exhaustive tests below
+*/
+
 
 TEST(HeroLocation, GetLoc_vs_Cstor) { //Default location check
 	George_Washington gw(1,2); //NOTE: (x,y) in constructor for heroes
@@ -229,17 +239,47 @@ TEST(MonsterLocation, MonsterAI) {
 
 }
 
-TEST(HeroName, GetName_vs_Cstor) { //Should these be set by default?
+TEST(HeroName, GetName_vs_Cstor) { //FIXME: Names set by default in constructor?
+	George_Washington gw(1,2); 
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+	EXPECT_EQ(gw.get_name(), "George Washington");
+	EXPECT_EQ(bf.get_name(), "Benjamin Franklin");
+	EXPECT_EQ(ja.get_name(), "John Adams");
+	EXPECT_EQ(jm.get_name(), "James Madison");
+	EXPECT_EQ(tj.get_name(), "Thomas Jefferson");
 
+
+	
 }
 
 TEST(HeroName, GetName_vs_SetName) {
+	George_Washington gw(1,2); 
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+
+	gw.set_name("George Washington");
+	bf.set_name("Benjamin Franklin");
+	ja.set_name("John Adams");
+	jm.set_name("James Madison");
+	tj.set_name("Thomas Jefferson");
+
+	EXPECT_EQ(gw.get_name(), "George Washington");
+	EXPECT_EQ(bf.get_name(), "Benjamin Franklin");
+	EXPECT_EQ(ja.get_name(), "John Adams");
+	EXPECT_EQ(jm.get_name(), "James Madison");
+	EXPECT_EQ(tj.get_name(), "Thomas Jefferson");
+
 }
 
-TEST(MonsterName, GetName_vs_Cstor) { //Should be empty?
+TEST(MonsterName, GetName_vs_Cstor) { //NOTE: Monsters have no name getters or setters
 }
 
-TEST(MonsterName, GetName_vs_SetName) { //Can these be set?
+TEST(MonsterName, GetName_vs_SetName) { //NOTE: Monsters have no name getters or setters
 }
 
 
@@ -247,22 +287,85 @@ TEST(ActorInfo, TotalCharacters) {
 //FIXME: Total characters inaccessible (protected, no getter), cannot verify, function may or may not work
 }
 
-TEST(HeroInit, InitCstor) {
+TEST(HeroInit, GetInit_vs_Cstor) {
+	George_Washington gw(1,2); 
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+	EXPECT_EQ(gw.get_initiative(), 14);
+	EXPECT_EQ(bf.get_initiative(), 13);
+	EXPECT_EQ(ja.get_initiative(), 9);
+	EXPECT_EQ(jm.get_initiative(), 11);
+	EXPECT_EQ(tj.get_initiative(), 10);
+
 }
 
-TEST(HeroInit, GetSetInit) {
+TEST(HeroInit, Get_vs_SetInit) {
+	George_Washington gw(1,2); 
+	Benjamin_Franklin bf(2,3);
+	John_Adams ja(3,4);
+	James_Madison jm(4,5);
+	Thomas_Jefferson tj(5,6);
+	gw.set_initiative(1);
+	bf.set_initiative(2);
+	ja.set_initiative(3);
+	jm.set_initiative(4);
+	tj.set_initiative(5);
+	EXPECT_EQ(gw.get_initiative(), 1);
+	EXPECT_EQ(bf.get_initiative(), 2);
+	EXPECT_EQ(ja.get_initiative(), 3);
+	EXPECT_EQ(jm.get_initiative(), 4);
+	EXPECT_EQ(tj.get_initiative(), 5);
+
 }
 
-TEST(MonsterInit, InitCstor) {
+TEST(MonsterInit, GetInit_vs_Cstor) {
+	King_George_III kg(1,2);
+	Robo_Shakespeare rs(2,3);
+	Kraken kr(3,4);
+	Red_Coat_General rg(4,5);
+	Three_Musketeers tm(5,6);
+	Red_Coats rc(6,7);
+	
+	EXPECT_EQ(kg.get_initiative(), 15);
+	EXPECT_EQ(rs.get_initiative(), 6);
+	EXPECT_EQ(kr.get_initiative(), 12);
+	EXPECT_EQ(rg.get_initiative(), 4);
+	EXPECT_EQ(tm.get_initiative(), 7);
+	EXPECT_EQ(rc.get_initiative(), 1);
+
+
 }
 
-TEST(MonsterInit, GetSetInit) {
+TEST(MonsterInit, Get_vs_SetInit) {
+	King_George_III kg(1,2);
+	Robo_Shakespeare rs(2,3);
+	Kraken kr(3,4);
+	Red_Coat_General rg(4,5);
+	Three_Musketeers tm(5,6);
+	Red_Coats rc(6,7);
+	kg.set_initiative(1);
+	rs.set_initiative(2);
+	kr.set_initiative(3);
+	rg.set_initiative(4);
+	tm.set_initiative(5);
+	rc.set_initiative(6);
+	
+	EXPECT_EQ(kg.get_initiative(), 1);
+	EXPECT_EQ(rs.get_initiative(), 2);
+	EXPECT_EQ(kr.get_initiative(), 3);
+	EXPECT_EQ(rg.get_initiative(), 4);
+	EXPECT_EQ(tm.get_initiative(), 5);
+	EXPECT_EQ(rc.get_initiative(), 6);
+
 }
 
-TEST(HeroAttack, HeroAttack) { //Takes argument
+TEST(HeroAttack, HeroAttack) { //FIXME: Uses same srand(time(nullptr)) setup, will cause problems if called to quickly. See the run_ai() function test for my advice, or try alternate scenario.
 }
 
-TEST(MonsterAttack, MonsterAttack) { //Takes random number
+TEST(MonsterAttack, MonsterAttack) { //FIXME: Uses same srand(time(nullptr)) setup as run_ai(), will cause problems if called more than once per second. See the run_ai() function test for my advice, or another method to guarantee unique seeds.
+ 
 }
 
 /*TEST(userMove, EdgeTests) {
