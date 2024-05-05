@@ -1,11 +1,12 @@
 //Tanner Dunn - Iheritor of Suffering
 #pragma once
 #include <algorithm>
-#include <ctime>
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <thread>
 #include "unistd.h"
 using namespace std;
 
@@ -85,7 +86,9 @@ protected:
 	int HP = 0;
 	int init = 0;
 public:
-	Monster(int y, int x, int basehealth, int initiative); 
+	Monster(int y, int x, int basehealth, int initiative);
+	void set_name(const string &new_name);
+	string get_name() const;
 	void set_DPS(int DPS);
 	int get_DPS() const;
 	void set_HP(int newHP);
