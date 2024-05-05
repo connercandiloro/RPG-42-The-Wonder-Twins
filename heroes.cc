@@ -1,11 +1,11 @@
 //Tanner Dunn - Inheritor of Suffering
 #include "heroes_and_monsters.h"
 
-Actor::Actor(int new_x, int new_y) : y(new_y), x(new_x){};
+Actor::Actor(int new_y, int new_x) : y(new_y), x(new_x){};
 //pure virtual move_location(int new_x, int new_y) = 0; already defined 
 pair<int, int> Actor::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Actor::move_location(int new_y, int new_x) { 
@@ -21,15 +21,15 @@ void Actor::total_characters(){
 	}
 //	cout << "Total number of characters on the map: " << total << endl;
 }
-Stationary_Object::Stationary_Object(int x, int y) : Actor(x,y){};
+Stationary_Object::Stationary_Object(int y, int x) : Actor(y, x){};
 void Stationary_Object::set_name(const string& new_name){object_name = new_name;}
 string Stationary_Object::get_name(){return object_name;}
 pair<int, int> Stationary_Object::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-Hero::Hero(int x, int y, int base_health, int initiative) : Actor(x, y), HP(base_health), init(initiative){};
+Hero::Hero(int y, int x, int base_health, int initiative) : Actor(y, x), HP(base_health), init(initiative){};
 void Hero::set_name(const string& new_name){name = new_name;}
 string Hero::get_name()const{return name;}
 void Hero::set_DPS(int DPS){attack_damage = DPS;}
@@ -51,7 +51,7 @@ void Hero::set_initiative(int new_initiative){
 }
 int Hero::get_HP()const{return HP;}
 //pure virtual attack() = 0; already defined;
-George_Washington::George_Washington(int x, int y) : Hero(x, y, 300, 14){}
+George_Washington::George_Washington(int y, int x) : Hero(y, x, 300, 14){is_called = true; set_name("George Washington");}
 void George_Washington::attack(int x){
 	switch(x){
 		case 1:
@@ -75,11 +75,11 @@ void George_Washington::attack(int x){
 	}	
 }
 pair<int, int> George_Washington::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-Benjamin_Franklin::Benjamin_Franklin(int x, int y) : Hero(x, y, 225, 13){is_called = true;}
+Benjamin_Franklin::Benjamin_Franklin(int y, int x) : Hero(y, x, 225, 13){is_called = true; set_name("Benjamin Franklin");}
 void Benjamin_Franklin::attack(int x){
 	switch(x){
 		case 1:
@@ -103,11 +103,11 @@ void Benjamin_Franklin::attack(int x){
 	}	
 }
 pair<int, int> Benjamin_Franklin::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-John_Adams::John_Adams(int x, int y) : Hero(x, y, 275, 9){is_called = true;}
+John_Adams::John_Adams(int y, int x) : Hero(y, x, 275, 9){is_called = true; set_name("John Adams");}
 void John_Adams::attack(int x){
 		switch(x){
 		case 1:
@@ -131,11 +131,11 @@ void John_Adams::attack(int x){
 	}	
 }
 pair<int, int> John_Adams::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-James_Madison::James_Madison(int x, int y) : Hero(x, y, 200, 11){is_called = true;}
+James_Madison::James_Madison(int y, int x) : Hero(y, x, 200, 11){is_called = true; set_name("James_Madison");}
 void James_Madison::attack(int x){
 	switch(x){
 		case 1:
@@ -159,11 +159,11 @@ void James_Madison::attack(int x){
 	}	
 }
 pair<int, int> James_Madison::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-Thomas_Jefferson::Thomas_Jefferson(int x, int y) : Hero(x, y, 300, 10){is_called = true;}
+Thomas_Jefferson::Thomas_Jefferson(int y, int x) : Hero(y, x, 300, 10){is_called = true; set_name("Thomas Jefferson");}
 void Thomas_Jefferson::attack(int x){
 	switch(x){
 		case 1:
@@ -187,11 +187,10 @@ void Thomas_Jefferson::attack(int x){
 	}	
 }
 pair<int, int> Thomas_Jefferson::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
-
 
 
 
