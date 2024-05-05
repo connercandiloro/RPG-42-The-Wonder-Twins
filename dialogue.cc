@@ -2,9 +2,9 @@
 #include "jjkcurselord.h"
 using std::string, std::to_string;
 
-Textbox::Textbox() : win(newwin(5, 83, 25, 2)) {}
+Textbox::Textbox() : win(newwin(6, 83, 25, 2)) {}
 
-Textbox::Textbox(const char npc) : win(newwin(5, 83, 25, 2)) {
+Textbox::Textbox(const char npc) : win(newwin(6, 83, 25, 2)) {
 	clearwin();
 	wrefresh(win);
     switch (npc) {
@@ -32,14 +32,14 @@ void Textbox::print(string line) {
 	confirm();
 }
 
-bool Textbox::print_select(string line, string select1, string select2) {
+int Textbox::print_select(string line, string select1, string select2, string select3) {
 	clearwin();
 	mvwprintw(win, 1, 1, "%s", line.c_str());
-	return select(select1, select2);
+	return select(select1, select2, select3);
 }
 
 void Textbox::clearwin() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
 		mvwprintw(win, i, 0, "                                                                                  ");
 	}
 	wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
@@ -47,7 +47,7 @@ void Textbox::clearwin() {
 
 void Textbox::confirm() {
     int choice;
-	mvwprintw(win, 3, 32, "*Press e to continue*");
+	mvwprintw(win, 4, 32, "*Press e to continue*");
 	wrefresh(win);
 	do {
 		choice = getch();
@@ -62,9 +62,10 @@ void Textbox::confirm() {
 	} while (choice != 'e');
 }
 
-bool Textbox::select(string option1, string option2) {
+int Textbox::select(string option1, string option2, string option3) {
 	mvwprintw(win, 2, 2, "%s", option1.c_str());
 	mvwprintw(win, 3, 2, "%s", option2.c_str());
+	mvwprintw(win, 4, 2, "%s", option3.c_str());
 	int cursorY = 2;
 	int choice;
 	do {
@@ -78,7 +79,12 @@ bool Textbox::select(string option1, string option2) {
 			case 'w':
 			case KEY_UP:
 				if (cursorY == 2) {
-					cursorY++;
+					if (option3 == "") {
+						cursorY = 3;
+					}
+					else {
+						cursorY = 4;
+					}
 				}
 				else {
 					cursorY--;
@@ -87,8 +93,8 @@ bool Textbox::select(string option1, string option2) {
 			case 'S':
 			case 's':
 			case KEY_DOWN:
-				if (cursorY == 3) {
-					cursorY--;
+				if (cursorY == 4 or cursorY == 3 and option3 == "") {
+					cursorY = 2;
 				}
 				else {
 					cursorY++;
@@ -102,10 +108,7 @@ bool Textbox::select(string option1, string option2) {
 				break;
 		};
 	} while (choice != 'e');
-	if (cursorY == 2) {
-		return true;
-	}
-	return false;
+	return cursorY - 1;
 }
 
 void Textbox::delwin() {

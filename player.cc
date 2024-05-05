@@ -191,5 +191,5 @@ void Player::linkmaps() {
 	castle_harbor->setpointers(ocean, outside_castle, 4);
 	outside_castle->setpointers(castle_harbor, castle, 5);
 	castle->setpointers(outside_castle, nullptr, 6);
-    currmap = castle_harbor;
+    currmap = tavern;
 }

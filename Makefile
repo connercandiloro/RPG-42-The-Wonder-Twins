@@ -1,6 +1,6 @@
 CC = g++
 CCFLAGS = -Wall -Wextra -std=c++2a -fsanitize=address
-MODULES = main.o player.o ui.o attributes.o cutscenes.o dialogue.o
+MODULES = main.o player.o ui.o attributes.o cutscenes.o dialogue.o heroes.o
 LDFLAGS = -fsanitize=address -lasan -lncurses
 
 a.out: $(MODULES)
@@ -17,5 +17,7 @@ cutscenes.o: cutscenes.cc
 	$(CC) $(CCFLAGS) -c cutscenes.cc
 dialogue.o: dialogue.cc
 	$(CC) $(CCFLAGS) -c dialogue.cc
+heroes.o: heroes.cc
+	$(CC) $(CCFLAGS) -c heroes.cc
 clean: 
 	rm -f a.out *.o

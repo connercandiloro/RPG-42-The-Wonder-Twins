@@ -4,6 +4,7 @@
 #include <string>
 #include <ncurses.h>
 #include "unordered_map"
+#include "heroes_and_monsters.h"
 
 class Player {
     WINDOW* win;
@@ -83,9 +84,9 @@ struct Character {
     char charLetter;
     Character* next;
     WINDOW* win;
-    int hp;
+    Hero* getclass;
     Character(int y, int x, char letter, WINDOW* w);
-    Character(int y, int x, char letter, WINDOW* w, int h);
+    Character(int y, int x, char letter, WINDOW* w, Hero* newclass);
     void printHP();
     void moveChar(int direction, int amount, int speed);
     void display();
@@ -105,15 +106,17 @@ void cutscene_check(Player* p);
 
 void cutscene_intro(Player* p);
 
+void cutscene_harbor(Player* p);
+
 class Textbox {
     WINDOW* win;
 public:
     Textbox();
     Textbox(char npc);
     void print(std::string line);
-    bool print_select(std::string line, std::string select1, std::string select2);
+    int print_select(std::string line, std::string select1, std::string select2, std::string select3 = "");
     void clearwin();
     void confirm();
-    bool select(std::string option1, std::string option2);
+    int select(std::string option1, std::string option2, std::string option3 = "");
     void delwin();
 };
