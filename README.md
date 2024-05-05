@@ -1,4 +1,4 @@
-# RPG-42 README
+![Founding Freedom Logo](https://ibb.co/gypBHYR)
 
 ## Roles:
 * Project manager - Conner
