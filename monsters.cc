@@ -1,9 +1,11 @@
 //Tanner Dunn - Inheritor of Suffering
 #include "heroes_and_monsters.h"
 
-Monster::Monster(int x, int y, int base_health, int initiative) : Actor(x, y), HP(base_health), init(initiative){};
+Monster::Monster(int y, int x, int base_health, int initiative) : Actor(y, x), HP(base_health), init(initiative){};
 void Monster::set_DPS(int DPS){attack_damage = DPS;}
 int Monster::get_DPS()const{return attack_damage;}
+void Monster::set_name(const string& new_name){name = new_name;}
+string Monster::get_name()const{return name;}
 void Monster::set_HP(int new_HP){
 	if(new_HP < 1){
 		//	cout << "YOU DIED" << endl;
@@ -22,9 +24,10 @@ void Monster::set_initiative(int new_initiative){
 }
 //pure virtual void attack() = 0; already defined
 //pure virtual void run_ai() = 0; already defined
-King_George_III::King_George_III(int x, int y) : Monster(x, y, 450, 15){is_called = true;}
+King_George_III::King_George_III(int y, int x) : Monster(y, x, 450, 15){is_called = true; set_name("King George III");}
 void King_George_III::attack(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -48,12 +51,13 @@ void King_George_III::attack(){
 	}	
 }
 pair<int, int> King_George_III::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void King_George_III::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
@@ -72,9 +76,10 @@ void King_George_III::run_ai(){
 		move_location(new_y, x);
 	}
 }
-Robo_Shakespeare::Robo_Shakespeare(int x, int y) : Monster(x, y, 300, 6){is_called = true;}
+Robo_Shakespeare::Robo_Shakespeare(int y, int x) : Monster(y, x, 300, 6){is_called = true; set_name("Robo Shakespeare Jr");}
 void Robo_Shakespeare::attack(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -98,12 +103,13 @@ void Robo_Shakespeare::attack(){
 	}	
 }
 pair<int, int> Robo_Shakespeare::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Robo_Shakespeare::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
@@ -122,9 +128,10 @@ void Robo_Shakespeare::run_ai(){
 		move_location(new_y, x);
 	}
 }
-Kraken::Kraken(int x, int y) : Monster(x, y, 400, 12){is_called = true;}
+Kraken::Kraken(int y, int x) : Monster(y, x, 400, 12){is_called = true; set_name("Davy Squidsworth");}
 void Kraken::attack(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -148,12 +155,13 @@ void Kraken::attack(){
 	}	
 }
 pair<int, int> Kraken::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Kraken::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
@@ -172,9 +180,10 @@ void Kraken::run_ai(){
 		move_location(new_y, x);
 	}
 }
-Red_Coat_General::Red_Coat_General(int x, int y) : Monster(x, y, 275, 4){is_called = true;}
+Red_Coat_General::Red_Coat_General(int y, int x) : Monster(y, x, 275, 4){is_called = true; set_name("Red Coat General");}
 void Red_Coat_General::attack(){	
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -199,12 +208,13 @@ void Red_Coat_General::attack(){
 }
 
 pair<int, int> Red_Coat_General::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Red_Coat_General::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
@@ -223,9 +233,10 @@ void Red_Coat_General::run_ai(){
 		move_location(new_y, x);
 	}
 }
-Three_Musketeers::Three_Musketeers(int x, int y) : Monster(x, y, 250, 7){is_called = true;}
+Three_Musketeers::Three_Musketeers(int y, int x) : Monster(y, x, 250, 7){is_called = true; set_name("Three Musketeers");}
 void Three_Musketeers::attack(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -249,12 +260,13 @@ void Three_Musketeers::attack(){
 	}	
 }
 pair<int, int> Three_Musketeers::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Three_Musketeers::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
@@ -273,9 +285,10 @@ void Three_Musketeers::run_ai(){
 		move_location(new_y, x);
 	}	
 }
-Red_Coats::Red_Coats(int x, int y) : Monster(x, y, 200, 1){is_called = true;}
+Red_Coats::Red_Coats(int y, int x) : Monster(y, x, 200, 1){is_called = true; set_name("Red Coat");}
 void Red_Coats::attack(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_attack_number = (rand() % 3) +1;
 	switch(random_attack_number){
 		case 1:
@@ -294,17 +307,18 @@ void Red_Coats::attack(){
 			//	cout << get_DPS() << " Damage Done!" << endl;
 		break;
 		default:
-			cout << "Invalid Choice!" << endl;
+		//	cout << "Invalid Choice!" << endl;
 		break;
 	}	
 }
 pair<int, int> Red_Coats::get_location(){
-	int pos1 = x;
-	int pos2 = y;
+	int pos1 = y;
+	int pos2 = x;
 	return make_pair(pos1, pos2);
 }
 void Red_Coats::run_ai(){
 	srand(time(nullptr));
+	this_thread::sleep_for(chrono::milliseconds(rand()% 1000));
 	int random_number = (rand() % 4) +1;
 	if(random_number == 1){
 		int new_x = x - 1;
