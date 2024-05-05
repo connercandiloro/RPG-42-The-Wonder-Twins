@@ -19,9 +19,10 @@ int main() {
     wrefresh(mainwin);
     int choice;
     //main game loop
+    cutscene_check(p);
     do {
-        cutscene_check(p); //checks for cutscene trigger
-        p->display(); //updates screen
+        p->display(); //updates player position
+        cutscene_check(p);
         choice = p->getinput(); //gets player input
     } while (choice != 'z');
     //game quits whenever player inputs 'z'

@@ -52,26 +52,31 @@ int Player::getx() {
 	return xPos;
 }
 
+void Player::setpos(int y, int x) {
+	yPos = y;
+	xPos = x;
+}
+
 void Player::mvup() {
-    if (canwalk(checkup(), this)) {
+    if (canwalk(checkup())) {
         yPos--;
     }
 }
 
 void Player::mvdown() {
-    if (canwalk(checkdown(), this)) {
+    if (canwalk(checkdown())) {
         yPos++;
     }
 }
 
 void Player::mvleft() {
-    if (canwalk(checkleft(), this)) {
+    if (canwalk(checkleft())) {
         xPos--;
     }
 }
 
 void Player::mvright() {
-    if (canwalk(checkright(), this)) {
+    if (canwalk(checkright())) {
             xPos++;
         }
 }
@@ -167,7 +172,7 @@ void Player::debug() {
 }
 
 void Player::display() {
-    loadmap();
+	loadmap();
 	debug();
 	wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
     mvwaddch(win, yPos, xPos, playerChar);

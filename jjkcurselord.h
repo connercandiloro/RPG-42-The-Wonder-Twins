@@ -28,6 +28,7 @@ public:
 	WINDOW* getwin();
     int gety();
     int getx();
+    void setpos(int y, int x);
 	void mvup();
 	void mvdown();
 	void mvleft();
@@ -75,7 +76,7 @@ void mvwprintwcolor(WINDOW* w, int y, int x, std::string s, int pairID);
 
 int getcolorID(const char c, const Player* p);
 
-bool canwalk(const char c, const Player* p);
+bool canwalk(const char c);
 
 bool hasDialogue(const char c);
 
@@ -84,13 +85,17 @@ struct Character {
     char charLetter;
     Character* next;
     WINDOW* win;
-    Hero* getclass;
+    Hero* heroclass;
+    Monster* monsterclass;
     Character(int y, int x, char letter, WINDOW* w);
     Character(int y, int x, char letter, WINDOW* w, Hero* newclass);
+    Character(int y, int x, char letter, WINDOW* w, Monster* newclass);
     void printHP();
     void moveChar(int direction, int amount, int speed);
     void display();
 };
+
+void displayOrder(Character* c);
 
 class turn_order {
     Character* first;
@@ -101,6 +106,8 @@ public:
 };
 
 void start_combat_intro(Player* p);
+
+void start_combat_harbor(Player* p);
 
 void cutscene_check(Player* p);
 

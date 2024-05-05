@@ -9,6 +9,7 @@ void load_color() {
     init_pair(5, COLOR_WHITE, COLOR_BLACK);
     init_pair(6, COLOR_BLACK, COLOR_WHITE);
 }
+
 void mvwaddchcolor(WINDOW* w, int y, int x, char c, int pairID) {
     wattron(w, COLOR_PAIR(pairID));
     mvwaddch(w, y, x, c);
@@ -99,7 +100,7 @@ int getcolorID(const char c, const Player* p) {
     return 0;
 }
 
-bool canwalk(const char c, const Player* p) {
+bool canwalk(const char c) {
     switch (c) {
         case ' ':
             return true;

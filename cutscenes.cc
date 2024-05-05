@@ -10,13 +10,12 @@ using std::vector, std::string, std::make_pair, std::to_string;
 #define LEFT 2
 #define RIGHT 3
 
-bool intro = false;
+bool intro_scene = false;
+bool harbor_scene = false;
 
 Character::Character(int y, int x, char letter, WINDOW* w) : yPos(y), xPos(x), charLetter(letter), win(w) {
     display();
 }
-
-Character::Character(int y, int x, char letter, WINDOW* w, Hero* newclass) : yPos(y), xPos(x), charLetter(letter), win(w), next(nullptr), getclass(newclass) {}
 
 void Character::moveChar(int direction, int amount, int speed) {
     display();
@@ -47,11 +46,20 @@ void Character::moveChar(int direction, int amount, int speed) {
 }
 
 void Character::printHP() {
-    if (getclass->get_HP() < 0) {
-        getclass->set_HP(0);
+    if (heroclass != nullptr) {
+        if (heroclass->get_HP() < 0) {
+            heroclass->set_HP(0);
+        }
+        string line = "HP: " + to_string(heroclass->get_HP());
+        mvwprintw(win, yPos + 1, xPos - 3, "%s", line.c_str());
     }
-    string line = "HP: " + to_string(getclass->get_HP());
-    mvwprintw(win, yPos + 1, xPos - 3, "%s", line.c_str());
+    else {
+        if (monsterclass->get_HP() < 0) {
+            monsterclass->set_HP(0);
+        }
+        string line = "HP: " + to_string(monsterclass->get_HP());
+        mvwprintw(win, yPos + 1, xPos - 3, "%s", line.c_str());
+    }
     wrefresh(win);
 }
 
@@ -61,101 +69,13 @@ void Character::display() {
 }
 
 void cutscene_check(Player* p) {
-    if (!intro) {
+    if (!intro_scene) {
         cutscene_intro(p);
-        intro = true;
+        intro_scene = true;
     }
-}
-
-void start_combat_intro(Player* p) {
-    WINDOW* win = p->getwin();
-    Character* george = new Character(12, 27, 'G', win, new George_Washington(0, 0));
-    Character* jeff = new Character(10, 57, 'J', win, new Thomas_Jefferson(0, 0));
-    Character* ben = new Character(14, 57, 'B', win, new Benjamin_Franklin(0, 0));
-    turn_order order;
-    order.add(george);
-    order.add(jeff);
-    order.add(ben);
-    Textbox text;
-    text.print("Thomas Jefferson and Benjamin Franklin want to fight!");
-    while (jeff->getclass->get_HP() > 0 or ben->getclass->get_HP() > 0) {
-        Character* currChar = order.getfirst();
-        do {
-            wclear(win);
-            wborder(win, (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
-            george->display();
-            george->printHP();
-            jeff->display();
-            jeff->printHP();
-            ben->display();
-            ben->printHP();
-            wrefresh(win);
-            if (currChar->charLetter == 'G') {
-                int playerAtkChoice = text.print_select("Choose an attack:", "Command and Conquer", "Fists of Freedom", "Trillion Dollar Destruction");
-                int playerTargetChoice = text.print_select("Choose a target:", "Jefferson", "Benjamin");
-                while (playerTargetChoice == 1 and jeff->getclass->get_HP() == 0 or playerTargetChoice == 2 and ben->getclass->get_HP() == 0) {
-                    text.print("The target's HP can't go any lower");
-                    playerTargetChoice = text.print_select("Choose a target:", "Jefferson", "Benjamin");
-                }
-                if (playerAtkChoice == 1) {
-                    text.print("George Washington commands his fleet to attack!");
-                }
-                else if (playerAtkChoice == 2) {
-                    text.print("George Washington hurls a fury of fists!");
-                }
-                else if (playerAtkChoice == 3) {
-                    text.print("George Washington summons a trillion dollar bills!");
-                }
-                if (playerTargetChoice == 1) {
-                    george->getclass->attack(playerAtkChoice);
-                    jeff->getclass->set_HP(jeff->getclass->get_HP() - george->getclass->get_DPS());
-                    string line = "Thomas Jefferson was hit for " + to_string(george->getclass->get_DPS()) + " damage";
-                    text.print(line);
-                }
-                else {
-                    george->getclass->attack(playerAtkChoice);
-                    ben->getclass->set_HP(ben->getclass->get_HP() - george->getclass->get_DPS());
-                    string line = "Benjamin Franklin was hit for " + to_string(george->getclass->get_DPS()) + " damage";
-                    text.print(line);
-                }
-            }
-            else if (currChar->charLetter == 'J' and currChar->getclass->get_HP() > 0) {
-                srand(time(nullptr));
-                int attackchoice = rand() % 3 + 1;
-                if (attackchoice == 1) {
-                    text.print("Thomas Jefferson exclaims the Declaration of Independence against his opponent, striking fear into their hearts!");
-                }
-                else if (attackchoice == 2) {
-                    text.print("Thomas Jefferson throws his opponent into his macaroni machine!");
-                }
-                else if (attackchoice == 3) {
-                    text.print("Thomas Jefferson exclaims that religious freedom will be a part of America once the British are gone, causes dread within his opponet!");
-                }
-                jeff->getclass->attack(attackchoice);
-                george->getclass->set_HP(george->getclass->get_HP() - jeff->getclass->get_DPS() / 2);
-                string line = "You were hit for " + to_string(george->getclass->get_DPS() / 2) + " damage";
-                text.print(line);
-            }
-            else if (currChar->charLetter == 'B' and currChar->getclass->get_HP() > 0) {
-                srand(time(nullptr));
-                int attackchoice = rand() % 3 + 1;
-                if (attackchoice == 1) {
-                    text.print("Benjamin Franklin fills his opponent's mind with too much wisdom!");
-                }
-                else if (attackchoice == 2) {
-                    text.print("Benjamin Franklin throws an electric charged spear at his opponet!");
-                }
-                else if (attackchoice == 3) {
-                    text.print("Benjamin Franklin hurls a hot Franklin Stove burning his opponet!");
-                }
-                ben->getclass->attack(attackchoice);
-                george->getclass->set_HP(george->getclass->get_HP() - ben->getclass->get_DPS() / 3);
-                string line = "You were hit for " + to_string(george->getclass->get_DPS() / 3) + " damage";
-                text.print(line);
-            }
-            currChar = currChar->next;
-        } while (currChar != order.getfirst());
-        text.delwin();
+    if (!harbor_scene and p->currmap->ID == 2) {
+        cutscene_harbor(p);
+        harbor_scene = true;
     }
 }
 
@@ -218,7 +138,7 @@ void cutscene_intro(Player* p) {
     text.print("George: I want to give King George the American special!");
     text.print("Jefferson: Oh yeah, and how do you suppose we do so?");
     text.print("Adams, always one for bold strategies, makes a suggestion.");
-    text.print("Adams: 'How about we hijack a ship and invade Britain?");
+    text.print("Adams: How about we hijack a ship and invade Britain?");
     text.print("Jefferson: That's impossible! sailing from-");
     text.print("George Washington interrupts with a fiery glare.");
     text.print("George: Shut up! \"Impossible\" is not in my vocabulary. Men, let us set sail!");
@@ -228,7 +148,42 @@ void cutscene_intro(Player* p) {
 }
 
 void cutscene_harbor(Player* p) {
-    
+    Textbox text;
+    Character George(p->gety(), p->getx(), 'G', p->getwin());
+    Character Benjamin(p->gety() + 2, p->getx() + 2, 'B', p->getwin());
+    Character Jefferson(p->gety() + 4, p->getx() + 2, 'J', p->getwin());
+    Character Adams(p->gety() - 2, p->getx() + 2, 'A', p->getwin());
+    Character Madison(p->gety() - 4, p->getx() + 2, 'M', p->getwin());
+    Character Readcoat1(10, 35, 'R', p->getwin());
+    Character Readcoat2(10, 44, 'r', p->getwin());
+    text.print("As our Founding Fathers arrive to the harbor, the air buzzes with anticipation and the scent of salt.");
+    text.print("Dockworkers scurry about, their shouts mingling with the creaking of ropes and the slap of water against wooden hulls.");
+    text.print("Amidst the chaos, the towering silhouette of a majestic ship looms large, its sleek form casting an imposing shadow over the bustling dockyard.");
+    text.print("Guarded by a contingent of stern-faced Redcoats, it seems an impenetrable fortress, a challenge that awaits George Washington and his merry band of rebels.");
+    text.print("George points excitedly at one of the ships.");
+    text.print("George: Hmm, that ship be looking mighty fine, she might be the one!");
+    text.print("Adams: You've said that about every ship today. Can you please just pick one?");
+    text.print("George looks towards the most imposing vessel guarded by a squadron of Redcoats.");
+    text.print("George: That one!");
+    text.print("Jefferson: Uh, are you sure that one-?");
+    text.print("George, full of fervor, and charges headlong towards the ship.");
+    text.print("George: LEROY JENKINS!");
+    George.moveChar(RIGHT, 33, 50);
+    text.print("The Readcoats take notice of George.");
+    text.print("Redcoats: HALT!");
+    text.print("George: NAY! I will claim this vessel. For Democracy, for Freedom, for Harambe!");
+    p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
+    p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
+    p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
+    p->currmap->scene_data.insert(make_pair(Madison.charLetter, make_pair(Madison.yPos, Madison.xPos)));
+    //start_combat_harbor(p);
+    p->setpos(George.yPos, George.xPos);
+    p->display();
+    text.print("Adams: Holy ****, it worked! The Boat is ours!");
+    text.print("George: No time to rest, To Great Britain!");
+    p->currmap->prev->prev->scene_data.clear();
+    p->display();
+    text.delwin();
 }
 
 turn_order::turn_order() : first(nullptr) {}

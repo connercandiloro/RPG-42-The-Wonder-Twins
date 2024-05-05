@@ -93,7 +93,7 @@ int Textbox::select(string option1, string option2, string option3) {
 			case 'S':
 			case 's':
 			case KEY_DOWN:
-				if (cursorY == 4 or cursorY == 3 and option3 == "") {
+				if (cursorY == 4 or (cursorY == 3 and option3 == "")) {
 					cursorY = 2;
 				}
 				else {
