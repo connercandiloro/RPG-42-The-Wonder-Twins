@@ -12,6 +12,7 @@ using std::vector, std::string, std::make_pair, std::to_string;
 
 bool intro_scene = false;
 bool harbor_scene = false;
+bool castle_scene = false;
 
 Character::Character(int y, int x, char letter, WINDOW* w) : yPos(y), xPos(x), charLetter(letter), win(w) {
     display();
@@ -76,6 +77,10 @@ void cutscene_check(Player* p) {
     if (!harbor_scene and p->currmap->ID == 2) {
         cutscene_harbor(p);
         harbor_scene = true;
+    }
+    if (!castle_scene and p->currmap->ID == 5) {
+        cutscene_castle(p);
+        castle_scene = true;
     }
 }
 
@@ -145,6 +150,7 @@ void cutscene_intro(Player* p) {
     p->currmap->scene_data['A'].first = Adams.yPos;
     p->currmap->scene_data['A'].second = Adams.xPos;
     text.delwin();
+    p->display();
 }
 
 void cutscene_harbor(Player* p) {
@@ -248,6 +254,17 @@ void cutscene_castle_harbor(Player* p) {
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     text.delwin();
+    p->display();
+}
+
+void cutscene_castle(Player* p) {
+    Textbox text;
+    text.print("As they approach the colossal iron doors barring their path, a foreboding sign looms overhead.");
+    text.print("Warning of dire consequences for those who dare to trespass onto royal grounds.");
+    text.print("George Washington presses on, undeterred by the warning.");
+    text.print("George: I can't read, so this won't stop me!");
+    text.delwin();
+    p->display();
 }
 
 turn_order::turn_order() : first(nullptr) {}

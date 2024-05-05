@@ -121,6 +121,8 @@ void cutscene_ocean(Player* p);
 
 void cutscene_castle_harbor (Player* p);
 
+void cutscene_castle(Player* p);
+
 class Textbox {
     WINDOW* win;
 public:
