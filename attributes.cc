@@ -22,7 +22,7 @@ void mvwprintwcolor(WINDOW* w, int y, int x, std::string s, int pairID) {
     wattroff(w, COLOR_PAIR(pairID));
 }
 
-int getcolorID(const char c, const Player* p) {
+int getcolorID(const char c, const Player* p, const int y) {
     if (p->currmap->ID == 0) {
         switch (c) {
             case '_':
@@ -70,8 +70,12 @@ int getcolorID(const char c, const Player* p) {
     else if (p->currmap->ID == 4) {
         switch (c) {
             case '=':
-            case '|':
+            case '|': {
+                if (y > 62) {
+                    return 5;
+                }
                 return 1;
+            }
             case ',':
                 return 3;
             case '~':

@@ -9,11 +9,11 @@ using std::vector, std::string, std::make_pair, std::to_string;
 #define DOWN 1
 #define LEFT 2
 #define RIGHT 3
-
 bool intro_scene = false;
 bool harbor_scene = false;
 bool castle_harbor_scene = false;
 bool outside_castle_scene = false;
+bool castle_scene = false;
 
 Character::Character(int y, int x, char letter, WINDOW* w) : yPos(y), xPos(x), charLetter(letter), win(w) {
     display();
@@ -70,9 +70,9 @@ void Character::display() {
     wrefresh(win);
 }
 
-void cutscene_check(Player* p) {
+bool cutscene_check(Player* p) {
     if (!intro_scene) {
-        //cutscene_intro(p);
+        cutscene_intro(p);
         intro_scene = true;
     }
     if (!harbor_scene and p->currmap->ID == 2) {
@@ -87,6 +87,12 @@ void cutscene_check(Player* p) {
         cutscene_castle_outside(p);
         outside_castle_scene = true;
     }
+    if (!castle_scene and p->currmap->ID == 6) {
+        cutscene_castle(p);
+        castle_scene = true;
+        return true;
+    }
+    return false;
 }
 
 void cutscene_intro(Player* p) {
@@ -96,7 +102,6 @@ void cutscene_intro(Player* p) {
     Character Jefferson(7, 59, 'J', p->getwin());
     Character Adams(7, 22, 'A', p->getwin());
     Character Madison(7, 32, 'M', p->getwin());
-
     text.print("In the shadowy confines of \"Thy ol' Kernel Kerney's Tavern,\" George Washington reclines amid his rambunctious comrades.");
     text.print("The pungent aroma of spilt ale permeates the air, mingling with the dense smoke wafting from hand-rolled tobacco.");
     text.print("As the laughter reaches a crescendo, the door bursts open dramatically, and in stumbles Egghead Humpty, gasping out between heaves.");
@@ -190,8 +195,8 @@ void cutscene_harbor(Player* p) {
     //start_combat_harbor(p);
     p->setpos(George.yPos, George.xPos);
     p->display();
-    text.print("Adams: Holy ****, it worked! The Boat is ours!");
-    text.print("George: No time to rest, To Great Britain!");
+    text.print("Adams: Holy ****, it worked! The boat is ours!");
+    text.print("George: No time to rest, to Great Britain!");
     George.moveChar(RIGHT, 3, 100);
     George.moveChar(UP, 8, 150);
     cutscene_ocean(p);
@@ -228,7 +233,6 @@ void cutscene_ocean(Player* p) {
     text.print("Davy: Huzaah, is that true? I simply can not allow it then.");
     text.print("Davy: I challenge you goodsirs to a duel.");
     //start_combat_ocean(p);
-    text.delwin();
     text.print("Davy, defeated, begins to tear up.");
     text.print("Davy: Rahh, I lost my dignity, ahhh.");
     text.print("Adams: There there, calm down. Its not your fault that you lost its because that wretched King George failed to help you.");
@@ -273,34 +277,53 @@ void cutscene_castle_harbor2(Player* p) {
 }
 
 void cutscene_castle_outside(Player* p) {
-    Character Benjamin(p->gety() + 2, p->getx() + 2, 'B', p->getwin());
-    Character Jefferson(p->gety() + 4, p->getx() + 2, 'J', p->getwin());
-    Character Adams(p->gety() - 2, p->getx() + 2, 'A', p->getwin());
+    p->currmap->prev->scene_data.clear();
+    Character Benjamin(p->gety() + 2, p->getx() + 4, 'B', p->getwin());
+    Character Jefferson(p->gety() + 4, p->getx() + 4, 'J', p->getwin());
+    Character Adams(p->gety() - 2, p->getx() + 4, 'A', p->getwin());
+    Character Musketeer1(12, 47, 'M', p->getwin());
+    Character Musketeer2(10, 49, 'M', p->getwin());
+    Character Musketeer3(14, 49, 'M', p->getwin());
     Textbox text;
     text.print("Out brave heros make there way inside the castle walls.");
     text.print("There they are met by the formidable trio known as the Royal Musketeers.");
     text.print("Their sneering taunts echoing off the castle walls.");
     text.print("George: One, two, three. First we'll kill you, and then drink tea!");
     text.print("The 3 Musketeers want to battle!");
+    p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
+    p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
+    p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     //start_combat_castle(p);
+    p->display();
     text.print("You vanquished the Three Musketeers!");
     text.print("King George lies just ahead.");
     text.delwin();
+    p->display();
 }
 
 void cutscene_castle(Player* p) {
     Textbox text;
-    Character Benjamin(p->gety() + 2, p->getx() + 2, 'B', p->getwin());
-    Character Jefferson(p->gety() + 4, p->getx() + 2, 'J', p->getwin());
-    Character Adams(p->gety() - 2, p->getx() + 2, 'A', p->getwin());
+    p->currmap->prev->scene_data.clear();
+    Character George(p->gety(), p->getx(), 'G', p->getwin());
+    Character Benjamin(p->gety() + 2, p->getx() + 4, 'B', p->getwin());
+    Character Jefferson(p->gety() + 4, p->getx() + 4, 'J', p->getwin());
+    Character Adams(p->gety() - 2, p->getx() + 4, 'A', p->getwin());
+    Character KingGeorge(p->gety(), p->getx() + 40, 'K', p->getwin());
     text.print("Finally, the Founding Fathers stand before King George himself.");
     text.print("His arrogance palpable as he sneers.");
     text.print("King George: Fear me and my wrath!");
-    text.print("Without hesitation, George Washington raises his weapon and fires, silencing the tyrant forever.");
-    Character Bullet(p->gety(), p->getx() + 1, '.', p->getwin());
+    text.print("Without hesitation, George Washington steps foward.");
+    George.moveChar(RIGHT, 7, 100);
+    text.print("He then raises his weapon and fires, silencing the tyrant forever.");
+    text.print("BANG!");
+    Character Bullet(George.yPos, George.xPos + 1, '.', p->getwin());
+    Bullet.moveChar(RIGHT, 32, 25);
+    KingGeorge.charLetter = ' ';
+    KingGeorge.display();
     text.print("George: Alas, liberty restored!");
     text.print("George: Maybe the real liberty was the friends we made along the way.");
     text.print("Amidst laughter and camaraderie, they make their way back to their ship.");
     text.print("Sailing off into the sunset, leaving behind a land forever changed by their absurd and audacious quest for freedom.");
     text.print("The End");
+    endwin();
 }

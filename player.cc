@@ -156,11 +156,11 @@ char Player::getinput() {
 void Player::loadmap() {
     for (unsigned int i = 0; i < currmap->mapvec.size(); i++) {
 		for (unsigned j = 0; j < currmap->mapvec[i].size(); j++) {
-			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j], this));
+			mvwaddchcolor(win, i + 1, j + 1, currmap->mapvec[i][j], getcolorID(currmap->mapvec[i][j], this, j));
 		}
 	}
 	for (const auto &pair : currmap->scene_data) {
-		mvwaddchcolor(win, pair.second.first, pair.second.second, pair.first, getcolorID(pair.first, this));
+		mvwaddchcolor(win, pair.second.first, pair.second.second, pair.first, getcolorID(pair.first, this, 0));
 	}
 }
 

@@ -74,7 +74,7 @@ void mvwaddchcolor(WINDOW* w, int y, int x, char c, int pairID);
 
 void mvwprintwcolor(WINDOW* w, int y, int x, std::string s, int pairID);
 
-int getcolorID(const char c, const Player* p);
+int getcolorID(const char c, const Player* p, const int y);
 
 bool canwalk(const char c);
 
@@ -113,7 +113,7 @@ void start_combat_ocean(Player* p);
 
 void start_combat_castle(Player* p);
 
-void cutscene_check(Player* p);
+bool cutscene_check(Player* p);
 
 void cutscene_intro(Player* p);
 
