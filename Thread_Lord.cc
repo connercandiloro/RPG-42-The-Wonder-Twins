@@ -26,7 +26,6 @@ if(deck.size() == 0) throw std:: invalid_argument("no movement in the deque");
 char temp = deck.front();
 c = temp;
 deck.pop_front();
-return temp;
 }
 
 //};
