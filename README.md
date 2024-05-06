@@ -1,14 +1,14 @@
 ![Founding Freedom Logo](FinalFinalLogo.jpg)
 
-## 🔴How to Play🔴
+## 🛑How to Play🛑
 
 Playing Founding Freedom is a simple flash styled game with controls being **w** **a** **s** **d** to move around the map. When fighting colonists or other entities select an attack with **enter** or **e**
 
-## 🔴Story of Game🔴
+## 🛑Story of Game🛑
 
 "Founding Freedom" delves into the real-life events of the American Revolution, records of their quest for freedom, justice, and liberation from British colonization will forever be immortalized. Join the unforgettable cast of heroes; George Washington, Jefferson, Adams, Hamilton, and Madison, as they embark on a daring journey across the seas to challenge the British mandate. Brace yourself for an epic tale of courage, camaraderie, and tomfoolery as these unlikely champions defy the odds in the pursuit of spreading democracy.
 
-## 🔴Roles🔴
+## 🛑Roles🛑
 
 #### * Project manager - Conner
 I was responsible for the overall managment of the group for our Founding Freedom game. Our team was one of the most talented and cooperative I have worked with on a project by far. Updating them on recent life events that coorelated to my motivation towards anything was met with warm responses that really lifted up my mood. Sending updates every night to Kerney and the read me you see before you were my main jobs as project manager. I could not of done this withought mentioning Luke who really stepped up when I was at my lowest.
@@ -31,6 +31,8 @@ I worked on the characters of game, created a hierarchy of all the heroes and mo
 P.M. Rating: 10/10
 
 #### * Socketroth - Shadow (Toovey)
+ I established a connection between a dedicated server and a client side connection. Got the game set up for us to implement multi-player.
+ P.M. Rating: 9/10
 
 #### * Taste Tester - Luke
 Testing - Luke Olson (test.cc, music_test.cc):
