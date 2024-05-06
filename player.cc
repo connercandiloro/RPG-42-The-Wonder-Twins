@@ -115,33 +115,31 @@ char Player::checkright() {
 	return mvwinch(win, yPos, xPos + 1);
 }
 
-char Player::getinput() {
-    int choice;
-    choice = getch();
-		switch (choice){
-			case 'w':
-			case 'W':
-			case KEY_UP:
-				mvup();
-				break;
-			case 'a':
-			case 'A':
-			case KEY_LEFT:
-				mvleft();
-				break;
-			case 's':
-			case 'S':
-			case KEY_DOWN:
-				mvdown();
-				break;
-			case 'd':
-			case 'D':
-			case KEY_RIGHT:
-			    mvright();
-				break;
-			default:
-				break;
-		}
+char Player::getinput(int choice) {
+	switch (choice){
+		case 'w':
+		case 'W':
+		case KEY_UP:
+			mvup();
+			break;
+		case 'a':
+		case 'A':
+		case KEY_LEFT:
+			mvleft();
+			break;
+		case 's':
+		case 'S':
+		case KEY_DOWN:
+			mvdown();
+			break;
+		case 'd':
+		case 'D':
+		case KEY_RIGHT:
+		    mvright();
+			break;
+		default:
+			break;
+	}
     return choice;
 }
 

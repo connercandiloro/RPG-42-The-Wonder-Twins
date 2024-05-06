@@ -37,7 +37,7 @@ public:
 	char checkdown();
 	char checkleft();
 	char checkright();
-    char getinput();
+    char getinput(int choice);
     void loadmap();
 	void debug();
 	void display();
