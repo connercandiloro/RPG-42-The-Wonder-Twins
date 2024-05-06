@@ -20,10 +20,11 @@ void Thread_Safety::in_char(const char &c) {
 deck.push_back(c);
 };
 
-char  Thread_Safety:: out_char(){
-		std::lock_guard LG(lock_deque);
+void Thread_Safety:: out_char(char &c){
+std::lock_guard LG(lock_deque);
 if(deck.size() == 0) throw std:: invalid_argument("no movement in the deque");
 char temp = deck.front();
+c = temp;
 deck.pop_front();
 return temp;
 }
