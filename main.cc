@@ -1,11 +1,43 @@
 #include "jjkcurselord.h"
 #include "Thread_Lord.h"
 #include<thread>
+#include <mutex>
+#include <deque>
+
 using namespace std;
 
+class Safe_Thread{
+	mutex mut;
+	deque<char> deck;
+	public:
+	Safe_Thread(){};
+	void in_char(const char &c){
+		lock_guard LG(mut);
+		deck.push_back(c);
+	}
+	[[nodiscard]]	char out_char(){
+		lock_guard LG(mut);
+		char temp = deck.front();
+		deck.pop_front();
+		return temp;
+	}
+	[[nodiscard]]size_t size(){
+		lock_guard LG(mut);
+		return deck.size();
+	}
 
+
+} TS;
+
+
+void user_IN(){
+	usleep(uint32_t(rand()%5+1) * 1000);
+	int  c = getch();
+	TS.in_char(char(c));
+}
 
 int main() {
+	
 	//starts ncurses mode
 	initscr();
 	noecho();
@@ -22,31 +54,24 @@ int main() {
 	p->loadmap();
 	wrefresh(mainwin);
 
-	Thread_Safety TS;
+
 
 	int choice = 0;
 	//main game loop
 	cutscene_check(p);
 	do {
-		p->display(); //updates player position
-		if (cutscene_check(p)) {
-			break; //breaks game loop if final cutscene is played
-		}
-		//	p->getinput();
-		// p->getinput(threadSafety.out_char());									//		choice = p->getinput(); //waits for player input
+	p->display(); //updates player position
+	if (cutscene_check(p)) {
+	break; //breaks game loop if final cutscene is played
+	}
+	//	p->getinput();
+	// p->getinput(threadSafety.out_char());									//		choice = p->getinput(); //waits for player input
 
 	} while (choice != 'z'); //game quits whenever player inputs 'z'
-	while(true) { 
-	char c;
-	cin >> c;
-	char out;
-	thread t1(TS.in_char(), &c);
-	thread t2(TS.out_char(), &out);
-	t1.join();
-	t2.join();
 
-	p->getinput(out);
-	}
+
+	
+	
 	//game quits whenever player inputs 'z'
 	endwin();
 
