@@ -115,7 +115,9 @@ char Player::checkright() {
 	return mvwinch(win, yPos, xPos + 1);
 }
 
-char Player::getinput(int choice) {
+char Player::getinput() {
+	int choice;
+	choice = getch();
 	switch (choice){
 		case 'w':
 		case 'W':

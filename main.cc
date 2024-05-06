@@ -3,7 +3,6 @@
 #include<thread>
 #include <mutex>
 #include <deque>
-
 using namespace std;
 
 class Safe_Thread{
@@ -29,7 +28,6 @@ class Safe_Thread{
 
 } TS;
 
-
 void user_IN(){
 	usleep(uint32_t(rand()%5+1) * 1000);
 	int  c = getch();
@@ -37,7 +35,6 @@ void user_IN(){
 }
 
 int main() {
-	
 	//starts ncurses mode
 	initscr();
 	noecho();
@@ -54,9 +51,7 @@ int main() {
 	p->loadmap();
 	wrefresh(mainwin);
 
-
-
-	int choice = 0;
+	int choice;
 	//main game loop
 	cutscene_check(p);
 	do {
@@ -64,14 +59,8 @@ int main() {
 	if (cutscene_check(p)) {
 	break; //breaks game loop if final cutscene is played
 	}
-	//	p->getinput();
-	// p->getinput(threadSafety.out_char());									//		choice = p->getinput(); //waits for player input
-
+	choice = p->getinput();
 	} while (choice != 'z'); //game quits whenever player inputs 'z'
-
-
-	
-	
 	//game quits whenever player inputs 'z'
 	endwin();
 
