@@ -131,6 +131,7 @@ void cutscene_intro(Player* p) {
     Character Jefferson(7, 59, 'J', p->getwin());
     Character Adams(7, 22, 'A', p->getwin());
     Character Madison(7, 32, 'M', p->getwin());
+	text.print("music link placeholder");
     text.print("In the shadowy confines of \"Thy ol' Kernel Kerney's Tavern,\" George Washington reclines amid his rambunctious comrades.");
     text.print("The pungent aroma of spilt ale permeates the air, mingling with the dense smoke wafting from hand-rolled tobacco.");
     text.print("As the laughter reaches a crescendo, the door bursts open dramatically, and in stumbles Egghead Humpty, gasping out between heaves.");
