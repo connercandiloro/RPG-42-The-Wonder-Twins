@@ -4,10 +4,12 @@
 using namespace std;
 
 void inputsafety(Thread_Safety& threadSafety){
+	char input;
+	cin>>input;
 while(true){
-		char input;
-		cin>>input;
+		if(!cin) break;
 		threadSafety.in_char(input);
+	//	cout<< threadSafety.out_char()<< endl;
 }
 }
 int main() {
@@ -39,7 +41,10 @@ int main() {
         if (cutscene_check(p)) {
             break; //breaks game loop if final cutscene is played
         }
-        choice = p->getinput(); //waits for player input
+	//	p->getinput();
+   // p->getinput(threadSafety.out_char());
+choice= threadSafety.out_char();
+//		choice = p->getinput(); //waits for player input
 
     } while (choice != 'z'); //game quits whenever player inputs 'z'
     input.join();
