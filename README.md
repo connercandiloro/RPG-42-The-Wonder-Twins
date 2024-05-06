@@ -2,7 +2,7 @@
 
 ## 🛑How to Play🛑
 
-Playing Founding Freedom is a simple flash styled game with controls being **w** **a** **s** **d** to move around the map. When fighting colonists or other entities select an attack with **enter** or **e**
+Playing Founding Freedom is a simple flash styled game with controls being **w** **a** **s** **d** to move around the map. When fighting colonists or other entities select an attack with **enter** or **e**, if you would like to quit the game during movement periods press **z**
 
 ## 🛑Story of Game🛑
 
