@@ -45,4 +45,4 @@ P.M. Rating: 9/10
 I was the script writer so my role didnt have much coding involved in it instead i was more involved with the creative process. I learnt many things such as how to work with multiple people and how to adjust a creative narrative to better fit the capabilities of the team. Honesty the project was fun and the entire team went above and beyond so kudos to them.
 P.M. Rating: 10/10
 
-![Diagram](RPG 42 diagram.pdf)
+![Diagram](Diagram.jpeg)
