@@ -1,4 +1,5 @@
 //Luke Olson Gtesting
+//tested inheritance on two seperate occasions, code here, assisted on adding music wav files to bridges, see music_test.cc or README.
 #include <iostream>
 #include "heroes_and_monsters.h"
 #include <gtest/gtest.h> //Compile with -lgtest, \g++ test.cc heroes.cc monsters.cc -lgtest

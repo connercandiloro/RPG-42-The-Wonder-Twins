@@ -131,7 +131,7 @@ void cutscene_intro(Player* p) {
     Character Jefferson(7, 59, 'J', p->getwin());
     Character Adams(7, 22, 'A', p->getwin());
     Character Madison(7, 32, 'M', p->getwin());
-	text.print("music link placeholder");
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/11/fontanilla_0993765");
     text.print("In the shadowy confines of \"Thy ol' Kernel Kerney's Tavern,\" George Washington reclines amid his rambunctious comrades.");
     text.print("The pungent aroma of spilt ale permeates the air, mingling with the dense smoke wafting from hand-rolled tobacco.");
     text.print("As the laughter reaches a crescendo, the door bursts open dramatically, and in stumbles Egghead Humpty, gasping out between heaves.");
@@ -160,6 +160,7 @@ void cutscene_intro(Player* p) {
     Jefferson.moveChar(LEFT, 5, 150);
     text.print("Jefferson: What have you say of my marriage prospects?");
     text.print("Jefferson: Have at thee!");
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/12/fontanilla_0993765");
     p->currmap->scene_data.insert(make_pair(Egghead.charLetter, make_pair(Egghead.yPos, Egghead.xPos)));
     p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
@@ -167,6 +168,7 @@ void cutscene_intro(Player* p) {
     p->currmap->scene_data.insert(make_pair(Madison.charLetter, make_pair(Madison.yPos, Madison.xPos)));
     start_combat_intro(p->getwin());
     p->display();
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/11/fontanilla_0993765");
     text.print("As the dust settles, George stand victorious.");
     Adams.moveChar(DOWN, 3, 150);
     Adams.moveChar(RIGHT, 18, 75);
@@ -202,6 +204,7 @@ void cutscene_harbor(Player* p) {
     Character Madison(p->gety() - 4, p->getx() + 2, 'M', p->getwin());
     Character Readcoat1(10, 35, 'R', p->getwin());
     Character Readcoat2(10, 44, 'r', p->getwin());
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/13/fontanilla_0993765");
     text.print("As our Founding Fathers arrive to the harbor, the air buzzes with anticipation and the scent of salt.");
     text.print("Dockworkers scurry about, their shouts mingling with the creaking of ropes and the slap of water against wooden hulls.");
     text.print("Amidst the chaos, the towering silhouette of a majestic ship looms large, its sleek form casting an imposing shadow over the bustling dockyard.");
@@ -218,6 +221,7 @@ void cutscene_harbor(Player* p) {
     text.print("The Readcoats take notice of George.");
     text.print("Redcoats: HALT!");
     text.print("George: NAY! I will claim this vessel. For Democracy, for Freedom, for Harambe!");
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/14/fontanilla_0993765");
     p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
@@ -225,6 +229,7 @@ void cutscene_harbor(Player* p) {
     start_combat_harbor(p->getwin());
     p->setpos(George.yPos, George.xPos);
     p->display();
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/13/fontanilla_0993765");
     text.print("Adams: Holy ****, it worked! The boat is ours!");
     text.print("George: No time to rest, to Great Britain!");
     George.moveChar(RIGHT, 3, 100);
@@ -238,6 +243,7 @@ void cutscene_ocean(Player* p) {
     wborder(p->getwin(), (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
     wrefresh(p->getwin());
     Textbox text;
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/15/fontanilla_0993765");
     text.print("As the ship pulls away from the dock, our heros set sail for Great Britain.");
     p->loadmap();
     text.print("The ship sails into the sunset, the sound of distant waves mixed with the murmurs of a crew both triumphant and incredulous at their newfound fortune.");
@@ -263,6 +269,7 @@ void cutscene_ocean(Player* p) {
     text.print("George: To kill the king.");
     text.print("Davy: Huzaah, is that true? I simply can not allow it then.");
     text.print("Davy: I challenge you goodsirs to a duel.");
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/16/fontanilla_0993765");
     p->currmap->scene_data.insert(make_pair(George.charLetter, make_pair(George.yPos, George.xPos)));
     p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
@@ -270,6 +277,7 @@ void cutscene_ocean(Player* p) {
     start_combat_ocean(p->getwin());
     p->loadmap();
     printSprite_Davy(p->getwin(), 10, 45);
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/15/fontanilla_0993765");
     text.print("Davy, defeated, begins to tear up.");
     text.print("Davy: Rahh, I lost my dignity, ahhh.");
     text.print("Adams: There there, calm down. Its not your fault that you lost its because that wretched King George failed to help you.");
@@ -288,6 +296,7 @@ void cutscene_castle_harbor(Player* p) {
     wborder(p->getwin(), (int)'|', (int)'|', (int)'-', (int)'-', (int)'+', (int)'+', (int)'+', (int)'+');
     wrefresh(p->getwin());
     Textbox text;
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/17/fontanilla_0993765");
     text.print("Disembarking onto the rocky shores, George Washington leads his band of misfits towards the imposing castle gates, determination blazing in their eyes.");
     text.print("With nothing but their wits and a reckless courage, they press onward, ready for their final showdown with the tyrant who dares to oppress their land.");
     p->setpos(4, 50);
@@ -327,11 +336,13 @@ void cutscene_castle_outside(Player* p) {
     text.print("Their sneering taunts echoing off the castle walls.");
     text.print("George: One, two, three. First we'll kill you, and then drink tea!");
     text.print("The 3 Musketeers want to battle!");
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/18/fontanilla_0993765");
     p->currmap->scene_data.insert(make_pair(Benjamin.charLetter, make_pair(Benjamin.yPos, Benjamin.xPos)));
     p->currmap->scene_data.insert(make_pair(Jefferson.charLetter, make_pair(Jefferson.yPos, Jefferson.xPos)));
     p->currmap->scene_data.insert(make_pair(Adams.charLetter, make_pair(Adams.yPos, Adams.xPos)));
     start_combat_castle(p->getwin());
     p->display();
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/17/fontanilla_0993765");
     text.print("You vanquished the Three Musketeers!");
     text.print("King George lies just ahead.");
     text.delwin();
@@ -346,6 +357,7 @@ void cutscene_castle(Player* p) {
     Character Jefferson(p->gety() + 4, p->getx() + 4, 'J', p->getwin());
     Character Adams(p->gety() - 2, p->getx() + 4, 'A', p->getwin());
     Character KingGeorge(p->gety(), p->getx() + 40, 'K', p->getwin());
+	text.print("music: https://bridges-cs.herokuapp.com/assignments/19/fontanilla_0993765");
     text.print("Finally, the Founding Fathers stand before King George himself.");
     text.print("His arrogance palpable as he sneers.");
     text.print("King George: Fear me and my wrath!");
