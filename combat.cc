@@ -147,7 +147,7 @@ void start_combat_harbor(WINDOW* win) {
     order.add(bigredcoat);
     order.add(lilredcoat);
     Textbox text;
-    text.print("Thomas Jefferson and Benjamin Franklin want to fight!");
+    text.print("The Readcoats are picking a fight!");
     while (bigredcoat->monsterclass->get_HP() > 0 or lilredcoat->monsterclass->get_HP() > 0) {
         Character* currChar = order.getfirst();
         do {
@@ -163,7 +163,7 @@ void start_combat_harbor(WINDOW* win) {
             lilredcoat->display();
             lilredcoat->printHP();
             wrefresh(win);
-            if (currChar->charLetter == 'G') {
+            if (currChar->charLetter == 'G' and (bigredcoat->monsterclass->get_HP() > 0 or lilredcoat->monsterclass->get_HP() > 0)) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Command and Conquer", "Fists of Freedom", "Trillion Dollar Destruction");
                 int playerTargetChoice = text.print_select("Choose a target:", "Big Redcoat", "Little Redcoat");
                 while ((playerTargetChoice == 1 and bigredcoat->monsterclass->get_HP() == 0) or (playerTargetChoice == 2 and lilredcoat->monsterclass->get_HP() == 0)) {
@@ -192,7 +192,7 @@ void start_combat_harbor(WINDOW* win) {
                     text.print(line);
                 }
             }
-            else if (currChar->charLetter == 'J') {
+            else if (currChar->charLetter == 'J' and (bigredcoat->monsterclass->get_HP() > 0 or lilredcoat->monsterclass->get_HP() > 0)) {
                 int playerAtkChoice = text.print_select("Choose an attack:", "Independence Day", "Macaroni Mayhem", "Religious Revolution");
                 int playerTargetChoice = text.print_select("Choose a target:", "Big Redcoat", "Little Redcoat");
                 while ((playerTargetChoice == 1 and bigredcoat->monsterclass->get_HP() == 0) or (playerTargetChoice == 2 and lilredcoat->monsterclass->get_HP() == 0)) {
